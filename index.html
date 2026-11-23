@@ -1,8 +1,15 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Общий календарь руководства: графики рядом, назначение встреч, комментарии и поиск общего окна. Демо-версия.">
 <title>График руководства</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <style>
 /* Мир «Самрук-Энерго»: как контентный слайд фирменного шаблона.
    Белая шапка с логотипом и оранжевым названием, тонкая оранжевая линия под ней.
@@ -135,6 +142,9 @@ img.av{object-fit:cover}
 .ev .t{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:6px}
 .ev .t .cc{margin-left:auto;display:inline-flex;align-items:center;gap:3px;font-weight:600}
 .ev .h{font-weight:600;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;flex:none}
+.ev.short{flex-direction:row;align-items:center;gap:7px;padding:0 9px}
+.ev.short .t{flex:none}
+.ev.short .h{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
 .ev .sub{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .own{background:var(--blue-l);color:var(--ink)}
 .own .t{color:var(--blue)} .own .sub,.own .cc{color:var(--ink-2)}
@@ -308,10 +318,17 @@ em.away:hover{background:#E6E9EE}
 a.btn{text-decoration:none}
 .rep-note{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-sm);background:var(--page);font-size:13px;color:var(--ink-2)}
 
+.demo{background:#FFF1EB;color:var(--ink-2);font-size:13px}
+.demo .wrap{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+.demo b{color:var(--orange);font-weight:700}
+.demo button{font-weight:600;color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+
 /* ===== телефон ===== */
 @media (max-width:900px){
   .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .top .wrap{height:56px;gap:12px}
+  .demo span{display:none}
+  .demo .wrap{flex-wrap:nowrap;justify-content:space-between}
   .top .logo{height:28px}
   .top .proj{font-size:13px;padding-left:12px}
   .me-btn .nm{display:none}
@@ -358,6 +375,9 @@ a.btn{text-decoration:none}
 @media (max-width:340px){ .top .proj{display:none} }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+</head>
+<body>
+
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-l" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
@@ -385,6 +405,8 @@ a.btn{text-decoration:none}
   <span class="sp"></span>
   <button class="me-btn" id="me-btn" aria-label="Профиль и роль"></button>
 </div></header>
+
+<div class="demo" id="demo" hidden><div class="wrap"><b>Демо-версия, данные вымышленные</b><span>Изменения сохраняются только в этом браузере.</span><button id="demo-reset">Сбросить</button></div></div>
 
 <section class="hero">
   <img class="mark" src="mark.svg" alt="" aria-hidden="true">
@@ -630,6 +652,7 @@ function renderDay(v){
     for (const it of list){
       const e = it.ev; const top=(it.s-H0*60)/60*HPX+2; const h=Math.max((it.e-it.s)/60*HPX-4, 26);
       const w = 100/it.n; const conf = set.has(e.id+"|"+p.id); const meta = evMeta(e,p.id);
+      if (h < 46){ html += `<button class="ev short ${kindOf(e,p.id)} ${conf?"conf":""}" data-eid="${esc(e.id)}" title="${esc((e.start||"")+" "+e.title)}" style="top:${top}px;height:${h}px;left:calc(${w*it.lane}% + 4px);width:calc(${w}% - 8px)"><span class="t">${conf?'<span class="flag"></span>':""}${esc(e.start||"")}</span><span class="h">${esc(e.title)}</span></button>`; continue; }
       html += `<button class="ev ${kindOf(e,p.id)} ${conf?"conf":""}" data-eid="${esc(e.id)}" title="${esc(e.title)}" style="top:${top}px;height:${h}px;left:calc(${w*it.lane}% + 4px);width:calc(${w}% - 8px)">
         <span class="t">${conf?'<span class="flag" title="Пересечение"></span>':""}${e.series? ic("repeat","i s"):""}${esc(e.start||"")}${e.end? " – "+esc(e.end):""}${ccHTML(e)}</span>
         <span class="h" style="-webkit-line-clamp:${Math.max(1,Math.floor((h-31)/16.5))}">${esc(e.title)}</span>${meta && h>=96? `<span class="sub">${esc(meta)}</span>`:""}</button>`;
@@ -1089,11 +1112,70 @@ try{ const v = load("gr-view"); if (["day","week","list"].includes(v)) S.view=v;
 render();
 
 // ---------- данные ----------
+// ---------- демо-режим (публичный сайт вне claude.ai) ----------
+const DEMO = !window.claude?.use && (location.protocol==="file:" || /(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname) || new URLSearchParams(location.search).has("demo"));
+function demoSeed(){
+  const t = iso(new Date()), d = n => addDays(t, n), now = new Date().toISOString();
+  const data = {};
+  [["chair","Ахметов Е.С.","Председатель Правления"],["dep1","Беков Т.А.","Заместитель Председателя Правления"],["dep2","Жумабаева А.М.","Заместитель Председателя Правления"],
+   ["md1","Касымов Д.К.","Управляющий директор по производству"],["md2","Нурланов С.Б.","Управляющий директор по экономике и финансам"],["md3","Оспанов М.Р.","Управляющий директор по развитию"]]
+    .forEach(([id,name,role],i) => data["people/"+id] = {name, role, order:i+1});
+  const ev = (id, date, start, end, title, owner, people=[], extra={}) => data["events/"+id] = {title, date, start, end, owner, people, guests:"", place:"", note:"", kind:"Совещание", cc:0, ...extra};
+  ev("e1", t, "09:00","09:30","Планёрка","chair",["dep1","dep2"]);
+  ev("e2", t, "10:00","11:30","Совещание по ремонтной кампании 2027 года","md1",["dep1"],{guests:"Технические директора ДЗО", place:"ВКС"});
+  ev("e3", t, "11:00","12:00","Встреча с инвестором","chair",["md2"],{place:"Переговорная, 12 этаж", cc:2, kind:"Рабочая встреча"});
+  ev("e4", t, "14:00","15:00","Рассмотрение бюджета на 2027 год","md2",["chair","dep2"]);
+  ev("e5", t, "14:30","15:30","ВКС с Министерством энергетики","chair",[],{kind:"Звонок / ВКС"});
+  [0,7,14,21].forEach((n,i) => ev("s"+i, d(n), "16:00","17:00","Аппаратное совещание","chair",["dep1","dep2","md1","md2","md3"],{series:"sdemo", rep:"каждую неделю", kind:"Аппаратное совещание"}));
+  ev("e6", t, "17:30","18:30","Выезд на подстанцию","md3",[],{place:"ПС 500 кВ", guests:"Подрядная организация", kind:"Выезд"});
+  ev("e7", d(1), "10:00","11:00","Комитет по рискам","dep2",["md2"]);
+  ev("e8", d(1), "11:30","12:30","Отчёт по цифровизации","md3",["chair"],{note:"Подготовить презентацию"});
+  ev("e9", d(1), "15:00","16:00","Встреча с подрядчиком","md1",[],{guests:"Генеральный подрядчик"});
+  data["events/e3/comments/c1"] = {text:"Презентацию для инвестора отправил на почту.", by:"demo-2", at:now};
+  data["events/e3/comments/c2"] = {text:"Принято, переговорную забронировали.", by:"demo-user", at:now};
+  data["absences/a1"] = {pid:"dep1", reason:"Отпуск", from:d(2), to:d(4), note:""};
+  data["absences/a2"] = {pid:"md3", reason:"Командировка", from:d(3), to:d(3), note:"Филиал"};
+  return data;
+}
+function demoStore(){
+  const KEY = "gr-demo-v1"; let data = null;
+  try{ data = JSON.parse(localStorage.getItem(KEY) || "null"); }catch(e){}
+  if (!data) data = demoSeed();
+  const subs = new Set();
+  const persist = () => { try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){} };
+  const fire = () => { persist(); subs.forEach(f => f()); };
+  let n = 0; const nid = () => "d"+Date.now().toString(36)+(n++);
+  const snap = p => ({id:p.split("/").pop(), exists:p in data, data:() => data[p], metadata:{fromCache:false, hasPendingWrites:false}});
+  const kids = path => { const pre = path+"/"; return Object.keys(data).filter(k => k.startsWith(pre) && !k.slice(pre.length).includes("/")).map(snap); };
+  function doc(p){ return {id:p.split("/").pop(), path:p, get:async () => snap(p),
+    set:async v => { data[p] = JSON.parse(JSON.stringify(v)); fire(); },
+    update:async v => { if (!(p in data)) throw {code:"invalid_argument"}; data[p] = {...data[p], ...JSON.parse(JSON.stringify(v))}; fire(); },
+    delete:async () => { delete data[p]; fire(); }, collection:c => col(p+"/"+c)}; }
+  function col(path){ return {path, doc:id => doc(path+"/"+(id || nid())),
+    add:async v => { const r = doc(path+"/"+nid()); await r.set(v); return r; },
+    get:async () => { const ds = kids(path); return {docs:ds, size:ds.length, empty:!ds.length}; },
+    onSnapshot(next){ const f = () => { const ds = kids(path); next({docs:ds, size:ds.length, empty:!ds.length, metadata:{fromCache:false}, docChanges:() => []}); }; subs.add(f); setTimeout(f, 0); return () => subs.delete(f); }}; }
+  persist();
+  return {doc, collection:col, reset(){ data = demoSeed(); fire(); }};
+}
+function setupDemo(){
+  db = demoStore();
+  const names = {"demo-user":"Вы (секретарь)", "demo-2":"Помощник Нурланова С.Б."};
+  user = {profiles: async ids => Object.fromEntries([].concat(ids).map(i => [i, {id:i, name:names[i]||"", avatarUrl:""}]))};
+  dl = {save: async ({filename, data}) => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([data])); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); return {status:"saved"}; }};
+  S.me = {id:"demo-user", name:"Демо-пользователь", avatarUrl:""}; S.uid = "demo-user"; S.isAdmin = true; S.canWrite = true;
+  $("#demo").hidden = false;
+  $("#demo-reset").addEventListener("click", () => { db.reset(); toast("Примерные данные восстановлены"); });
+}
+
 async function start(){
-  if (!window.claude?.use){ S.offline = true; render(); return; }
-  [user, db, dl] = await Promise.all([claude.use("user"), claude.use("db"), claude.use("downloads")]);
-  if (!db){ S.offline = true; render(); return; }
-  if (user){ const [me, admin, cw] = await Promise.all([user.me(), user.canEdit(), user.can("data.write")]); S.me = me; S.uid = me.id; S.isAdmin = admin; S.canWrite = cw; }
+  if (DEMO) setupDemo();
+  else {
+    if (!window.claude?.use){ S.offline = true; render(); return; }
+    [user, db, dl] = await Promise.all([claude.use("user"), claude.use("db"), claude.use("downloads")]);
+    if (!db){ S.offline = true; render(); return; }
+    if (user){ const [me, admin, cw] = await Promise.all([user.me(), user.canEdit(), user.can("data.write")]); S.me = me; S.uid = me.id; S.isAdmin = admin; S.canWrite = cw; }
+  }
   const timer = setTimeout(() => { S.slow = true; render(); }, 10000);
   const done = () => { if (S.ready.people && S.ready.events) clearTimeout(timer); };
   db.collection("people").onSnapshot(snap => {
@@ -1114,3 +1196,6 @@ async function start(){
 start();
 })();
 </script>
+
+</body>
+</html>
