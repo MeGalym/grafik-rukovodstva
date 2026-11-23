@@ -1,0 +1,1116 @@
+<title>График руководства</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Мир «Самрук-Энерго»: как контентный слайд фирменного шаблона.
+   Белая шапка с логотипом и оранжевым названием, тонкая оранжевая линия под ней.
+   Тёмно-синяя полоса-титул с крупной датой и знаком-водяным знаком.
+   Ниже — светлая рабочая зона: слева месяц и руководители, справа графики рядом по часам.
+   Плашки вместо карточек: светлые на белом, синие для совместных встреч, оранжевый — один акцент (пересечения и главное действие). Теней нет. */
+:root{
+  color-scheme:light;
+  --blue:#0065AE;        /* brand-blue */
+  --navy:#013A6F;        /* navy: титул */
+  --blue-l:#E9EEF9;      /* brand-blue-light: плашки */
+  --blue-soft:#7AABD5;   /* второстепенный на тёмном */
+  --orange:#E95123;      /* brand-orange: один акцент */
+  --orange-l:#FDEDE7;
+  --gray-l:#F2F2F2;
+  --page:#F5F7FB;        /* рабочая зона */
+  --white:#FFFFFF;
+  --ink:#0D1A2B;  --ink-2:#44546A;  --ink-3:#5E6D82;
+  --line:#DCE3EE; --line-2:#C5D0E0;
+  --f:"Segoe UI","Open Sans",system-ui,Arial,sans-serif;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+  --hour:72px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{background:var(--page)}
+body{color:var(--ink);font-family:var(--f);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0;text-align:inherit}
+::selection{background:#CFE0F4}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:4px}
+*{scrollbar-width:thin;scrollbar-color:#C9D3E2 transparent}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#C9D3E2;border-radius:10px;border:3px solid var(--white)}
+svg.i{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.i.s{width:13px;height:13px}
+.wrap{max-width:1600px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+
+/* ===== шапка (как на слайде) ===== */
+.top{background:var(--white);border-bottom:1.5px solid var(--orange)}
+.top .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.top .logo{height:34px;width:auto;flex:none}
+.top .proj{color:var(--orange);font-weight:600;font-size:15px;padding-left:18px;border-left:1px solid var(--line);white-space:nowrap}
+.top .sp{flex:1}
+.me-btn{display:flex;align-items:center;gap:10px;padding:4px 4px 4px 12px;border-radius:999px;transition:background .15s}
+.me-btn:hover{background:var(--blue-l)}
+.me-btn .nm{display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
+.me-btn .nm b{font-weight:600;font-size:13px}
+.badge{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:999px;border:1px solid var(--blue);color:var(--blue);background:var(--white);font-size:12px;font-weight:600;white-space:nowrap}
+.badge.or{border-color:var(--orange);color:var(--orange)}
+.badge.gr{border-color:var(--line-2);color:var(--ink-3)}
+.av{width:32px;height:32px;border-radius:50%;flex:none;display:inline-grid;place-items:center;font-size:12px;font-weight:600;background:var(--blue-l);color:var(--blue);letter-spacing:.01em}
+.av.lead{background:var(--navy);color:var(--white)}
+.av.s{width:24px;height:24px;font-size:10px}
+img.av{object-fit:cover}
+
+/* ===== титул ===== */
+.hero{background:var(--navy);color:var(--white);position:relative;overflow:hidden}
+.hero .mark{position:absolute;right:-60px;top:-70px;width:460px;opacity:.2;pointer-events:none;filter:brightness(1.8) saturate(.6)}
+.hero .wrap{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;padding-top:28px;padding-bottom:24px}
+.hero h1{margin:0;font-weight:600;font-size:36px;line-height:1.1;letter-spacing:-.01em}
+.hero .year{color:var(--blue-soft);font-weight:400}
+.plates{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.plate{display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 14px;border-radius:var(--r-sm);background:rgba(233,238,249,.12);color:var(--white);font-weight:600;font-size:13px;font-variant-numeric:tabular-nums}
+.plate.or{background:var(--orange);padding-right:6px}
+.plate.or .ring{width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);display:grid;place-items:center}
+.plate.or:hover{filter:brightness(1.06)}
+.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.nav{display:flex;align-items:center;gap:2px;border:1px solid rgba(233,238,249,.28);border-radius:var(--r-sm);padding:2px}
+.nav button{height:32px;min-width:32px;border-radius:4px;display:grid;place-items:center;color:var(--white);font-weight:600;font-size:13px;padding:0 8px;transition:background .15s}
+.nav button:hover{background:rgba(233,238,249,.14)}
+.tabs{display:flex;gap:2px;border:1px solid rgba(233,238,249,.28);border-radius:var(--r-sm);padding:2px}
+.tabs button{height:32px;padding:0 14px;border-radius:4px;color:var(--blue-l);font-weight:600;font-size:13px;transition:background .15s,color .15s}
+.tabs button:hover{color:var(--white)}
+.tabs button[aria-pressed="true"]{background:var(--orange);color:var(--white)}
+.btn-l{height:38px;padding:0 14px;border-radius:var(--r-sm);background:var(--blue-l);color:var(--navy);font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:background .15s}
+.btn-l:hover{background:var(--white)}
+.btn-o{height:38px;padding:0 16px 0 13px;border-radius:var(--r-sm);background:var(--orange);color:var(--white);font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:filter .15s}
+.btn-o:hover{filter:brightness(1.07)}
+.btn-o[disabled]{background:rgba(233,238,249,.16);color:rgba(233,238,249,.55);cursor:not-allowed;filter:none}
+#strip{display:none}
+
+/* ===== рабочая зона ===== */
+.work .wrap{display:grid;grid-template-columns:268px minmax(0,1fr);gap:20px;padding-top:20px;padding-bottom:28px;align-items:start}
+.rail{display:flex;flex-direction:column;gap:20px;position:sticky;top:16px}
+.panel{background:var(--white);border-radius:var(--r-lg);padding:16px}
+.panel h2{margin:0 0 10px;font-size:14px;font-weight:600;color:var(--blue);display:flex;justify-content:space-between;align-items:center}
+.panel h2 button{font-size:12px;font-weight:600;color:var(--orange)}
+.mini-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.mini-h b{font-weight:600;font-size:14px;color:var(--blue);text-transform:capitalize}
+.ib{width:30px;height:30px;border-radius:var(--r-sm);display:grid;place-items:center;color:var(--ink-2);transition:background .15s,color .15s;flex:none}
+.ib:hover{background:var(--blue-l);color:var(--blue)}
+.mini{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.mini .wd{font-size:12px;color:var(--ink-3);padding:4px 0;text-align:center}
+.mini button{position:relative;height:32px;border-radius:var(--r-sm);font-size:13px;font-variant-numeric:tabular-nums;text-align:center;color:var(--ink);transition:background .15s}
+.mini button:hover{background:var(--blue-l)}
+.mini button.out{color:#A9B4C4}
+.mini button.has::after{content:"";position:absolute;left:50%;bottom:3px;width:4px;height:4px;border-radius:1px;background:var(--blue);transform:translateX(-50%)}
+.mini button.today{color:var(--orange);font-weight:700}
+.mini button.sel{background:var(--blue);color:var(--white);font-weight:600}
+.mini button.sel::after{background:var(--white)}
+.plist{display:flex;flex-direction:column;gap:2px}
+.prow{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:var(--r-md);width:100%;transition:background .15s}
+.prow:hover{background:var(--page)}
+.prow .nm{min-width:0;flex:1;line-height:1.25}
+.prow .nm b{display:block;font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prow .nm span{display:block;font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tick{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--line-2);display:grid;place-items:center;flex:none;color:var(--white);transition:background .15s,border-color .15s}
+.prow[aria-pressed="true"] .tick{background:var(--blue);border-color:var(--blue)}
+.prow[aria-pressed="false"] .nm{opacity:.55}
+.legend{display:flex;flex-direction:column;gap:8px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:flex;align-items:center;gap:9px}
+.legend i{width:22px;height:12px;border-radius:3px;flex:none}
+.lg-own{background:var(--blue-l)}.lg-joint{background:var(--blue)}.lg-part{background:var(--white);box-shadow:inset 0 0 0 1.5px var(--line-2)}.lg-conf{background:var(--white);box-shadow:inset 0 0 0 2px var(--orange)}
+
+.board{background:var(--white);border-radius:var(--r-lg);overflow:auto;max-height:calc(100vh - 32px);position:relative}
+
+/* день */
+.day{display:grid;min-width:100%}
+.ch{position:sticky;top:0;z-index:3;background:var(--white);border-bottom:1px solid var(--line);border-left:1px solid var(--line);padding:14px 12px;display:flex;gap:10px;align-items:center;min-width:0}
+.ch .nm{min-width:0;line-height:1.25}
+.ch .nm b{display:block;font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch .nm span{display:block;font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch.corner{left:0;z-index:5;border-left:0}
+.tcol{position:sticky;left:0;z-index:4;background:var(--white)}
+.tcol div{height:var(--hour);font-size:12px;color:var(--ink-3);text-align:right;padding-right:10px;transform:translateY(-9px);font-variant-numeric:tabular-nums}
+.tcol .nowt{position:absolute;right:4px;height:auto;transform:translateY(-50%);font-size:11px;font-weight:700;color:var(--white);background:var(--orange);padding:1px 6px;border-radius:4px}
+.col{position:relative;border-left:1px solid var(--line);background-image:linear-gradient(to bottom,var(--line) 1px,transparent 1px);background-size:100% var(--hour)}
+.col.add{cursor:copy}
+.ev{position:absolute;border-radius:var(--r-sm);padding:6px 9px;overflow:hidden;display:flex;flex-direction:column;gap:2px;font-size:12.5px;line-height:1.3;transition:filter .15s,box-shadow .15s}
+.ev .t{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:6px}
+.ev .t .cc{margin-left:auto;display:inline-flex;align-items:center;gap:3px;font-weight:600}
+.ev .h{font-weight:600;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;flex:none}
+.ev .sub{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.own{background:var(--blue-l);color:var(--ink)}
+.own .t{color:var(--blue)} .own .sub,.own .cc{color:var(--ink-2)}
+.joint{background:var(--blue);color:var(--white)}
+.joint .t,.joint .sub,.joint .cc{color:#CFE0F4}
+.part{background:var(--white);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.part .t{color:var(--ink-3)} .part .h{font-weight:500} .part .sub,.part .cc{color:var(--ink-3)}
+.ev:hover{filter:brightness(.97)} .joint:hover{filter:brightness(1.08)}
+.conf{box-shadow:inset 0 0 0 2px var(--orange)}
+.joint.conf{box-shadow:inset 0 0 0 2px var(--orange),inset 0 0 0 3.5px var(--white)}
+.flag{width:7px;height:7px;border-radius:2px;background:var(--orange);flex:none}
+.now{position:absolute;left:0;right:0;border-top:1.5px solid var(--orange);z-index:2;pointer-events:none}
+
+/* неделя */
+.week{display:grid;min-width:1020px}
+.wh{position:sticky;top:0;z-index:3;background:var(--white);border-bottom:1px solid var(--line);border-left:1px solid var(--line);padding:12px;font-size:12px;color:var(--ink-3);text-align:left}
+.wh b{display:block;font-size:22px;font-weight:600;color:var(--ink);line-height:1.1;font-variant-numeric:tabular-nums}
+.wh.today{box-shadow:inset 0 -3px 0 var(--orange)} .wh.today b{color:var(--orange)}
+button.wh:hover b{color:var(--blue)}
+.wh.corner{left:0;z-index:5;border-left:0}
+.wr{position:sticky;left:0;z-index:1;background:var(--white);border-bottom:1px solid var(--line);padding:12px;display:flex;gap:10px;align-items:flex-start}
+.wr .nm{min-width:0}.wr .nm b{display:block;font-size:13px;font-weight:600}.wr .nm span{font-size:12px;color:var(--ink-3)}
+.wc{border-left:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px;display:flex;flex-direction:column;gap:5px;min-height:76px}
+.wc.today{background:#FFF8F5}
+.wchip{border-radius:var(--r-sm);padding:6px 8px;font-size:12px;line-height:1.3;width:100%;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.wchip b{font-weight:700;margin-right:5px;font-variant-numeric:tabular-nums}
+.wchip.own b{color:var(--blue)}
+
+/* повестка (телефон) */
+.agenda{display:flex;flex-direction:column;gap:8px;padding:4px 0}
+.ag-day{font-size:17px;font-weight:600;color:var(--blue);margin:14px 2px 2px}
+.ag{display:grid;grid-template-columns:50px minmax(0,1fr);gap:10px;width:100%}
+.ag-t{padding-top:12px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.25}
+.ag-t b{display:block;font-weight:700;font-size:15px;color:var(--ink)}
+.ag-t small{font-size:12px;color:var(--ink-3)}
+.ag-b{border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.ag-b .h{font-weight:600;font-size:15px;line-height:1.3}
+.ag-b .m{display:flex;align-items:center;gap:8px;font-size:12.5px;min-width:0}
+.ag-b .m>span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.ag-b .f{display:flex;gap:6px 12px;font-size:12.5px;align-items:center;flex-wrap:wrap}
+.ag-b.own .m,.ag-b.own .f{color:var(--ink-2)}
+.ag-b.own .av:not(.lead){background:var(--white)}
+.ag-b.joint .m,.ag-b.joint .f{color:#CFE0F4}
+.ag-b .warn{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--orange)}
+.ag-b.joint .warn{color:#FFD2C2}
+.stack{display:inline-flex;gap:3px;flex:none;align-items:center}
+.joint .av{background:rgba(255,255,255,.18);color:var(--white)}
+.joint .av.lead{background:var(--white);color:var(--navy)}
+.stack .more{font-size:12px;margin-left:2px}
+.ag-empty{color:var(--ink-3);padding:14px 4px}
+
+/* список */
+.list{padding:6px 0}
+.sheet{padding:20px 24px;border-bottom:1px solid var(--line)}
+.sheet:last-child{border-bottom:0}
+.sheet-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.sheet-h h2{margin:0;font-size:16px;font-weight:600;color:var(--blue)}
+.sheet-h span{font-size:12.5px;color:var(--ink-3)}
+.r{display:grid;grid-template-columns:64px minmax(0,1.4fr) minmax(0,1fr) minmax(0,.8fr);gap:18px;padding:11px 10px;border-radius:var(--r-sm);width:100%;align-items:start;transition:background .15s}
+.r:hover{background:var(--blue-l)}
+.r .tm{font-weight:700;font-variant-numeric:tabular-nums;color:var(--blue)}
+.r .tt{font-weight:600}
+.r .tt small{display:block;color:var(--ink-3);font-size:12.5px;font-weight:400;margin-top:2px}
+.r .pp,.r .nt{color:var(--ink-2);font-size:13px;white-space:pre-line}
+.r.empty{color:var(--ink-3)}
+.list-tools{display:flex;justify-content:flex-end;padding:14px 24px 0}
+.chip-btn{font-size:12.5px;font-weight:600;color:var(--blue);padding:8px 12px;border-radius:var(--r-sm);background:var(--blue-l);display:inline-flex;align-items:center;gap:7px;transition:background .15s}
+.chip-btn:hover{background:#DCE5F5}
+
+.state{min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:40px 24px;color:var(--ink-2)}
+.state h3{margin:0;font-weight:600;font-size:20px;color:var(--blue)}
+.state p{margin:0;max-width:46ch}
+.spin{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--blue-l);border-top-color:var(--blue);animation:sp .9s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ===== боковая панель (как слайд) ===== */
+.scrim{position:fixed;inset:0;background:rgba(1,30,58,.42);z-index:20;animation:fade .2s ease}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);background:var(--white);z-index:21;display:flex;flex-direction:column;animation:slide .3s var(--ease);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+@keyframes slide{from{transform:translateX(32px);opacity:0}}
+@keyframes rise{from{transform:translateY(48px);opacity:0}}
+@keyframes fade{from{opacity:0}}
+.drawer header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px 14px;border-bottom:1.5px solid var(--orange)}
+.drawer header h3{margin:0;font-weight:600;font-size:19px;color:var(--blue)}
+.drawer .body{padding:18px 22px 22px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;flex:1}
+.drawer footer{padding:14px 22px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center;background:var(--white)}
+.fld{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fld>label,.fld>.lb{font-size:12.5px;color:var(--ink-2);font-weight:600}
+.inp{background:var(--white);border:1px solid var(--line-2);border-radius:var(--r-sm);padding:9px 11px;width:100%;min-width:0;transition:border-color .15s,box-shadow .15s}
+.inp:hover{border-color:#9FB0C7}
+.inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px #D5E3F4}
+.inp::placeholder{color:#8794A8}
+.inp.big{font-size:17px;font-weight:600;padding:11px 13px}
+textarea.inp{resize:vertical;min-height:60px}
+.grid3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.picks{display:flex;flex-wrap:wrap;gap:6px}
+.picks label{display:inline-flex;align-items:center;gap:7px;padding:3px 12px 3px 3px;border-radius:999px;background:var(--white);font-size:13px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line-2);transition:background .15s,box-shadow .15s,color .15s}
+.picks input{position:absolute;opacity:0;pointer-events:none}
+.picks label:has(input:checked){background:var(--blue);color:var(--white);box-shadow:none}
+.picks label:has(input:checked) .av{background:rgba(255,255,255,.2);color:var(--white)}
+.picks label:has(input:focus-visible){outline:2px solid var(--orange)}
+.hint{font-size:12.5px;color:var(--ink-3);margin:0}
+.busy{color:var(--orange);font-weight:600}
+.msg{font-size:13px;color:var(--orange);font-weight:600;min-height:1em;margin:0}
+.btn{height:38px;padding:0 16px;border-radius:var(--r-sm);font-weight:600;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;transition:background .15s,filter .15s}
+.btn.pri{background:var(--orange);color:var(--white)}.btn.pri:hover{filter:brightness(1.07)}.btn.pri[disabled]{opacity:.55}
+.btn.sec{background:var(--blue-l);color:var(--navy)}.btn.sec:hover{background:#DCE5F5}
+.btn.del{margin-left:auto;color:var(--orange)}.btn.del:hover{background:var(--orange-l)}
+.btn.del.armed{background:var(--orange);color:var(--white)}
+.ev-head{border-radius:var(--r-md);padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.ev-head .big{font-size:19px;font-weight:600;line-height:1.3}
+.ev-head .when{font-size:14px;font-weight:600}
+.ev-head.own{background:var(--blue-l)} .ev-head.own .when{color:var(--blue)}
+.ev-head.joint{background:var(--blue);color:var(--white)} .ev-head.joint .when{color:#CFE0F4}
+.facts{display:flex;flex-direction:column;gap:14px;margin:0}
+.facts dt{font-size:12.5px;color:var(--ink-3);font-weight:600;margin-bottom:4px}
+.facts dd{margin:0;white-space:pre-line}
+.who-line{display:inline-flex;align-items:center;gap:8px}
+.card{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;padding:12px;border-radius:var(--r-md);background:var(--page)}
+.card .two{display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:0}
+.card .bottom{grid-column:2;display:flex;justify-content:flex-end}
+
+/* комментарии */
+.cm{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:12px}
+.cm h4{margin:0;font-size:14px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:8px}
+.cm h4 span{color:var(--ink-3);font-weight:600}
+.cm-list{display:flex;flex-direction:column;gap:12px}
+.cm-i{display:grid;grid-template-columns:auto 1fr;gap:10px}
+.cm-i .hd{display:flex;gap:8px;align-items:baseline;font-size:13px}
+.cm-i .hd b{font-weight:600}.cm-i .hd time{color:var(--ink-3);font-size:12px}
+.cm-i .hd button{margin-left:auto;color:var(--ink-3);font-size:12px}.cm-i .hd button:hover{color:var(--orange)}
+.cm-i p{margin:3px 0 0;padding:8px 11px;background:var(--page);border-radius:0 var(--r-md) var(--r-md) var(--r-md);white-space:pre-line;overflow-wrap:anywhere}
+.cm-form{display:flex;gap:8px;align-items:flex-end}
+.cm-form textarea{min-height:42px;height:42px}
+.cm-form .btn{height:42px;width:42px;padding:0;flex:none}
+
+/* окна */
+.dur{display:flex;gap:6px}
+.dur button{flex:1;height:36px;border-radius:var(--r-sm);background:var(--blue-l);font-size:13px;font-weight:600;color:var(--navy);text-align:center}
+.dur button[aria-pressed="true"]{background:var(--blue);color:var(--white)}
+.slots{display:flex;flex-direction:column;gap:8px}
+.slot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:var(--r-md);background:var(--blue-l);width:100%;transition:background .15s}
+.slot:hover{background:#DCE5F5}
+.slot b{font-size:16px;font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums}
+.slot span{font-size:12.5px;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px}
+.slot .ring{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--orange);color:var(--orange);display:grid;place-items:center}
+.bar24{position:relative;height:12px;border-radius:3px;background:var(--blue-l);overflow:hidden}
+.bar24 i{position:absolute;top:0;bottom:0;background:var(--blue)}
+.bar-l{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-top:5px}
+.bar-k{display:flex;gap:14px;font-size:12px;color:var(--ink-2);margin-top:6px}
+.bar-k span{display:inline-flex;gap:6px;align-items:center}.bar-k i{width:10px;height:10px;border-radius:2px}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:var(--white);padding:11px 18px;border-radius:var(--r-sm);font-size:13px;font-weight:600;z-index:30;animation:up .3s var(--ease);white-space:nowrap}
+@keyframes up{from{transform:translate(-50%,12px);opacity:0}}
+
+/* новые элементы */
+.seg2{display:flex;background:var(--blue-l);border-radius:var(--r-sm);padding:3px;gap:2px}
+.seg2 button{flex:1;height:34px;border-radius:4px;font-weight:600;font-size:13px;color:var(--navy);text-align:center;padding:0 8px;white-space:nowrap}
+.seg2 button[aria-pressed="true"]{background:var(--white);color:var(--blue)}
+em.away{font-style:normal;display:inline-flex;align-items:center;gap:5px;height:20px;margin-top:3px;padding:0 8px;border-radius:999px;background:var(--gray-l);color:var(--ink-2);font-size:12px;font-weight:600;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+em.away:hover{background:#E6E9EE}
+.col.off{background-color:#F6F7F9}
+.wplate{border-radius:var(--r-sm);padding:6px 8px;font-size:12px;background:var(--gray-l);color:var(--ink-2);font-weight:600;width:100%}
+.ag-away{display:flex;flex-direction:column;gap:6px;margin-bottom:4px}
+.ag-away button{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r-md);background:var(--gray-l);font-size:13px;color:var(--ink-2)}
+.ag-away b{color:var(--ink);font-weight:600}
+.lg-away{background:var(--gray-l)}
+.plan-pre{white-space:pre-wrap;background:var(--page);border-radius:var(--r-md);padding:14px 16px;font-size:13px;line-height:1.55;max-height:40vh;overflow:auto;margin:0;font-family:inherit;color:var(--ink)}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+a.btn{text-decoration:none}
+.rep-note{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-sm);background:var(--page);font-size:13px;color:var(--ink-2)}
+
+/* ===== телефон ===== */
+@media (max-width:900px){
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .top .wrap{height:56px;gap:12px}
+  .top .logo{height:28px}
+  .top .proj{font-size:13px;padding-left:12px}
+  .me-btn .nm{display:none}
+  .hero .mark{width:300px;right:-80px;top:-40px}
+  .hero .wrap{display:block;padding-top:18px;padding-bottom:16px}
+  .hero h1{font-size:26px}
+  .hero .year{display:none}
+  .plates{margin-top:10px}.plate{height:30px;font-size:12.5px;padding:0 11px}
+  .ctl{margin-top:14px;flex-wrap:nowrap}
+  .ctl .nav,.ctl .btn-l span{display:none}
+  .ctl{gap:8px}
+  .tabs{flex:1}.tabs button{flex:1;text-align:center;padding:0 6px}
+  .btn-l{width:40px;padding:0;justify-content:center;background:rgba(233,238,249,.12);color:var(--white)}
+  .btn-o{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:10;height:52px;padding:0 20px 0 16px;font-size:15px;border-radius:26px}
+  .btn-o[disabled]{display:none}
+  #strip{display:grid;grid-template-columns:auto repeat(7,1fr) auto;gap:2px;align-items:center;margin-top:16px}
+  #strip .ib{color:var(--blue-l)} #strip .ib:hover{background:rgba(233,238,249,.12)}
+  #strip .d{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0 8px;border-radius:var(--r-sm);font-size:12px;color:var(--blue-soft);position:relative}
+  #strip .d b{font-size:16px;font-weight:600;color:var(--white);font-variant-numeric:tabular-nums}
+  #strip .d.has::after{content:"";position:absolute;bottom:3px;width:4px;height:4px;border-radius:1px;background:var(--blue-soft)}
+  #strip .d.today b{color:#FF9A78}
+  #strip .d.sel{background:var(--orange);color:var(--white)}#strip .d.sel b{color:var(--white)}#strip .d.sel::after{background:var(--white)}
+  .work .wrap{display:block;padding-top:12px;padding-bottom:96px}
+  .rail{position:static;gap:0;margin-bottom:12px}
+  .rail .p-mini,.rail .p-legend,.rail .panel h2{display:none}
+  .rail .panel{padding:0;background:transparent}
+  .plist{flex-direction:row;overflow-x:auto;gap:6px;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none}
+  .plist::-webkit-scrollbar{display:none}
+  .prow{width:auto;flex:none;background:var(--white);padding:4px 12px 4px 4px;border-radius:999px;gap:7px}
+  .prow .tick,.prow .nm span{display:none}
+  .prow .av{width:26px;height:26px;font-size:10px}
+  .prow[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px var(--blue)}
+  .board{max-height:none;overflow:visible;background:transparent;border-radius:0}
+  .board.boxed{background:var(--white);border-radius:var(--r-lg);overflow:auto}
+  .sheet{padding:16px 14px}.list-tools{padding:12px 14px 0}
+  .r{grid-template-columns:50px minmax(0,1fr);gap:3px 12px;padding:10px 6px}.r .pp,.r .nt{grid-column:2}.r .pp:empty,.r .nt:empty{display:none}
+  .drawer{top:auto;left:0;width:100%;max-height:92%;border-radius:18px 18px 0 0;animation:rise .35s var(--ease)}
+  .drawer::before{content:"";width:40px;height:4px;border-radius:2px;background:var(--line-2);margin:8px auto 0;flex:none}
+  .drawer header{padding-top:8px}
+  .inp{font-size:16px}
+  .state{min-height:260px}
+}
+@media (max-width:420px){ .grid3{grid-template-columns:1fr 1fr}.grid3 .fld:first-child{grid-column:1/-1} }
+@media (max-width:340px){ .top .proj{display:none} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-l" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-ne" viewBox="0 0 24 24"><path d="M8 16L16 8M9 8h7v7"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.7-3 2.9-4.6 5.5-4.6s4.8 1.6 5.5 4.6"/><path d="M16 5.2a3 3 0 010 5.6M17.5 14.6c1.6.5 2.6 1.9 3 4.4"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.9-3.6 3.6-5.5 7-5.5s6.1 1.9 7 5.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 12.5a7.5 7.5 0 01-11 6.6L4.5 20l1-4A7.5 7.5 0 1120 12.5z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 014-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 01-4 4H4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13.5v4M10 15.5h4"/></symbol>
+  <symbol id="i-xls" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 12l5 6M14 12l-5 6"/></symbol>
+  <symbol id="i-away" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+</svg>
+
+<header class="top"><div class="wrap">
+  <img class="logo" src="logo-color.svg" alt="Самрук-Энерго" width="107" height="34">
+  <span class="proj">График руководства</span>
+  <span class="sp"></span>
+  <button class="me-btn" id="me-btn" aria-label="Профиль и роль"></button>
+</div></header>
+
+<section class="hero">
+  <img class="mark" src="mark.svg" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div><h1 id="h1">&nbsp;</h1><div class="plates" id="plates"></div><div id="strip"></div></div>
+    <div class="ctl">
+      <div class="nav">
+        <button id="b-prev" aria-label="Назад"><svg class="i"><use href="#i-l"/></svg></button>
+        <button id="b-today">Сегодня</button>
+        <button id="b-next" aria-label="Вперёд"><svg class="i"><use href="#i-r"/></svg></button>
+      </div>
+      <div class="tabs" role="group" aria-label="Вид">
+        <button data-view="day">День</button><button data-view="week">Неделя</button><button data-view="list">Список</button>
+      </div>
+      <button class="btn-l" id="b-plan" aria-label="Отправить план на день"><svg class="i"><use href="#i-share"/></svg><span>План на день</span></button>
+      <button class="btn-l" id="b-free" aria-label="Найти общее окно"><svg class="i"><use href="#i-clock"/></svg><span>Найти окно</span></button>
+      <button class="btn-o" id="b-new"><svg class="i"><use href="#i-plus"/></svg>Назначить встречу</button>
+    </div>
+  </div>
+</section>
+
+<main class="work"><div class="wrap">
+  <aside class="rail">
+    <div class="panel p-mini" id="mini"></div>
+    <div class="panel"><h2><span>Руководители</span><button id="b-all" hidden>Показать всех</button></h2><div class="plist" id="plist"></div></div>
+    <div class="panel p-legend"><div class="legend">
+      <span><i class="lg-own"></i>Своя встреча</span><span><i class="lg-joint"></i>Совместная с руководителями</span>
+      <span><i class="lg-part"></i>Участие во встрече коллеги</span><span><i class="lg-conf"></i>Пересечение по времени</span><span><i class="lg-away"></i>Нет на месте</span></div></div>
+  </aside>
+  <div class="board" id="board"><div class="state"><div class="spin"></div><p>Загружаем графики</p></div></div>
+</div></main>
+<div id="overlay"></div>
+
+<script>
+(() => {
+const KINDS = ["Совещание","Рабочая встреча","Выезд","Подписание","Аппаратное совещание","Звонок / ВКС","Другое"];
+const H0 = 8, H1 = 21, HPX = 72, W0 = 9*60, W1 = 19*60;
+const MONTHS = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+const MONTHS_N = ["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
+const WD = ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"];
+const WDS = ["Вс","Пн","Вт","Ср","Чт","Пт","Сб"];
+
+const S = { people:[], events:[], absences:[], links:{}, uid:null, me:null, isAdmin:false, canWrite:null,
+  view:"day", date:iso(new Date()), month:null, hidden:new Set(), ready:{people:false,events:false}, offline:false, slow:false, roOverride:false };
+let db = null, user = null, dl = null, unsubComments = null, scrolledFor = null;
+const mq = window.matchMedia("(max-width:900px)");
+
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ic = (n, cls="i") => `<svg class="${cls}"><use href="#i-${n}"/></svg>`;
+function iso(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function parse(s){ const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); }
+function addDays(s,n){ const d = parse(s); d.setDate(d.getDate()+n); return iso(d); }
+function weekStart(s){ const d = parse(s); d.setDate(d.getDate()-((d.getDay()+6)%7)); return iso(d); }
+function ruDate(s){ const d = parse(s); return d.getDate()+" "+MONTHS[d.getMonth()]+" "+d.getFullYear(); }
+function dotDate(s){ const d = parse(s); return String(d.getDate()).padStart(2,"0")+"."+String(d.getMonth()+1).padStart(2,"0")+"."+d.getFullYear(); }
+function mins(t){ if(!t) return null; const [h,m] = t.split(":").map(Number); return h*60+(m||0); }
+function hhmm(m){ return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0"); }
+function span(e){ const s = mins(e.start) ?? H0*60; let en = mins(e.end); if(en==null || en<=s) en = s+60; return [s,en]; }
+function initials(n){ const p = String(n||"").replace(/[.]/g," ").split(/\s+/).filter(Boolean); return ((p[0]||"?")[0] + (p[1]? p[1][0] : "")).toUpperCase(); }
+function person(id){ return S.people.find(p => p.id===id); }
+const isLead = p => /председател/i.test(p?.role||"");
+function av(p, cls="av"){ return `<span class="${cls}${isLead(p)?" lead":""}" aria-hidden="true">${esc(initials(p?.name))}</span>`; }
+function toast(msg){ const t = document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2400); }
+function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function load(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function plural(n, a, b, c){ const m=n%10, h=n%100; return n+" "+(m===1&&h!==11? a : m>=2&&m<=4&&(h<10||h>=20)? b : c); }
+function durText(m){ const h=Math.floor(m/60), r=m%60; return (h? h+" ч":"")+(h&&r?" ":"")+(r? r+" мин":""); }
+const REASONS = ["Командировка","Отпуск","Больничный","Нет на месте"];
+const REP = {wd:"каждый рабочий день", w1:"каждую неделю", w2:"каждые 2 недели", m1:"каждый месяц"};
+function shortDate(s){ const d = parse(s); return d.getDate()+" "+MONTHS[d.getMonth()]; }
+function awayOf(pid, date){ return S.absences.find(a => a.pid===pid && a.from<=date && date<=(a.to||a.from)); }
+function awayText(a){ return a.reason + (a.to && a.to!==a.from ? " до "+shortDate(a.to) : ""); }
+function repeatDates(start, rule, until){
+  const out = []; const day = parse(start).getDate(); let d = parse(start); const end = parse(until);
+  while (d <= end && out.length < 60){
+    if (rule!=="wd" || (d.getDay()!==0 && d.getDay()!==6)) out.push(iso(d));
+    if (rule==="wd") d.setDate(d.getDate()+1);
+    else if (rule==="w1") d.setDate(d.getDate()+7);
+    else if (rule==="w2") d.setDate(d.getDate()+14);
+    else { const n = new Date(d.getFullYear(), d.getMonth()+1, 1); const last = new Date(n.getFullYear(), n.getMonth()+1, 0).getDate(); n.setDate(Math.min(day,last)); d = n; }
+  }
+  return out;
+}
+function tzOff(){ const m = -new Date().getTimezoneOffset(), a = Math.abs(m); return (m>=0?"+":"-")+String(Math.floor(a/60)).padStart(2,"0")+":"+String(a%60).padStart(2,"0"); }
+function outlookUrl(e){
+  const [s,en] = span(e); const who = [e.owner].concat(e.people||[]).map(person).filter(Boolean).map(p=>p.name);
+  const body = [who.length? "Руководители: "+who.join(", ") : "", e.guests? "Участники: "+e.guests.split("\n").join(", ") : "", e.note||""].filter(Boolean).join("\n");
+  const q = new URLSearchParams({path:"/calendar/action/compose", rru:"addevent", subject:e.title, startdt:`${e.date}T${hhmm(s)}:00${tzOff()}`, enddt:`${e.date}T${hhmm(en)}:00${tzOff()}`, location:e.place||"", body});
+  return "https://outlook.office.com/calendar/0/deeplink/compose?"+q.toString();
+}
+const canEditPid = pid => writable() && (S.isAdmin || myPid()===pid);
+const kindOf = (e, pid) => e.owner!==pid ? "part" : ((e.people||[]).length ? "joint" : "own");
+
+// ---------- права ----------
+const myPid = () => S.uid ? S.links[S.uid] || null : null;
+const writable = () => !S.offline && S.canWrite !== false && !S.roOverride;
+const canCreate = () => writable() && (S.isAdmin || !!myPid());
+const canEditEvent = e => writable() && (S.isAdmin || (myPid() && e.owner === myPid()));
+const canComment = () => writable() && !!S.uid;
+function roleInfo(){
+  if (S.offline) return {label:"Нет доступа", cls:"gr", hint:"Откройте страницу по ссылке claude.ai"};
+  if (S.isAdmin) return {label:"Секретарь", cls:"or", hint:"Назначает встречи во всех графиках"};
+  const p = person(myPid());
+  if (p) return {label:"Руководитель", cls:"", hint: writable()? "Ведёт свой график: "+p.name : p.name+", только просмотр"};
+  return {label: writable()? "Участник" : "Просмотр", cls:"gr", hint: writable()? "Видит все графики и комментирует" : "Видит все графики"};
+}
+
+// ---------- выборки ----------
+const visiblePeople = () => S.people.filter(p => !S.hidden.has(p.id));
+function eventsFor(pid, date){
+  return S.events.filter(e => e.date===date && (e.owner===pid || (e.people||[]).includes(pid)))
+    .sort((a,b)=> (mins(a.start)??0)-(mins(b.start)??0));
+}
+function conflictsOn(date){
+  const list = [], set = new Set();
+  for (const p of S.people){
+    const ev = eventsFor(p.id, date);
+    for (let i=0;i<ev.length;i++) for (let j=i+1;j<ev.length;j++){
+      const [a1,a2] = span(ev[i]), [b1,b2] = span(ev[j]);
+      if (a1 < b2 && b1 < a2){ list.push({p, a:ev[i], b:ev[j]}); set.add(ev[i].id+"|"+p.id); set.add(ev[j].id+"|"+p.id); }
+    }
+  }
+  return {list, set};
+}
+function freeSlots(pids, date, need){
+  const busy = [];
+  pids.forEach(pid => eventsFor(pid, date).forEach(e => busy.push(span(e))));
+  busy.sort((a,b)=>a[0]-b[0]);
+  const free = []; let cur = W0;
+  for (const [s,e] of busy){ if (s > cur) free.push([cur, Math.min(s,W1)]); cur = Math.max(cur, e); if (cur >= W1) break; }
+  if (cur < W1) free.push([cur, W1]);
+  return {free: free.filter(([s,e]) => e-s >= need), busy};
+}
+
+// ---------- рендер ----------
+function render(){ renderTop(); renderRail(); renderHero(); renderBoard(); }
+
+function renderTop(){
+  const r = roleInfo(); const me = S.me;
+  const face = me?.avatarUrl ? `<img class="av" src="${esc(me.avatarUrl)}" alt="">` : `<span class="av">${ic("user")}</span>`;
+  $("#me-btn").innerHTML = `<span class="nm"><b></b><span class="badge ${r.cls}"></span></span>${face}`;
+  $("#me-btn .nm b").textContent = me?.name || "Гость";
+  $("#me-btn .badge").textContent = r.label;
+}
+
+function renderRail(){
+  const base = S.month || S.date.slice(0,7)+"-01"; const b = parse(base);
+  const first = new Date(b.getFullYear(), b.getMonth(), 1); const gridStart = new Date(first); gridStart.setDate(1-((first.getDay()+6)%7));
+  const busy = new Set(S.events.map(e=>e.date)); const today = iso(new Date());
+  let cells = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"].map(w=>`<span class="wd">${w}</span>`).join("");
+  for (let i=0;i<42;i++){ const d = new Date(gridStart); d.setDate(gridStart.getDate()+i); const s = iso(d);
+    const cls = [d.getMonth()!==b.getMonth()?"out":"", busy.has(s)?"has":"", s===today?"today":"", s===S.date?"sel":""].join(" ");
+    cells += `<button class="${cls}" data-d="${s}" aria-label="${esc(ruDate(s))}">${d.getDate()}</button>`; }
+  $("#mini").innerHTML = `<div class="mini-h"><b>${MONTHS_N[b.getMonth()]} ${b.getFullYear()}</b><div style="display:flex;gap:2px">
+    <button class="ib" id="m-prev" aria-label="Предыдущий месяц">${ic("l")}</button><button class="ib" id="m-next" aria-label="Следующий месяц">${ic("r")}</button></div></div><div class="mini">${cells}</div>`;
+  $("#mini").querySelectorAll(".mini button").forEach(x => x.addEventListener("click", () => { S.date = x.dataset.d; S.month=null; render(); }));
+  const shift = n => { const d=parse(base); d.setMonth(d.getMonth()+n); S.month=iso(d); renderRail(); };
+  $("#m-prev").addEventListener("click", () => shift(-1)); $("#m-next").addEventListener("click", () => shift(1));
+
+  const pl = $("#plist");
+  pl.innerHTML = !S.people.length ? `<p class="hint">${S.ready.people? "Список пуст" : "Загрузка…"}</p>` :
+    S.people.map(p => `<button class="prow" data-pid="${esc(p.id)}" aria-pressed="${!S.hidden.has(p.id)}">${av(p)}<span class="nm"><b>${esc(p.name)}</b><span>${esc(p.role||"")}</span></span><span class="tick">${ic("ok","i s")}</span></button>`).join("");
+  pl.querySelectorAll(".prow").forEach(x => x.addEventListener("click", () => {
+    const id = x.dataset.pid; S.hidden.has(id)? S.hidden.delete(id) : S.hidden.add(id);
+    store("gr-hidden", JSON.stringify([...S.hidden])); render(); }));
+  $("#b-all").hidden = !S.hidden.size;
+}
+
+function renderHero(){
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.view===S.view)));
+  const d = parse(S.date);
+  if (S.view==="week"){
+    const a = parse(weekStart(S.date)), z = parse(addDays(weekStart(S.date),6));
+    $("#h1").innerHTML = `${a.getDate()}${a.getMonth()!==z.getMonth()? " "+MONTHS[a.getMonth()]:""} – ${z.getDate()} ${MONTHS[z.getMonth()]} <span class="year">${z.getFullYear()}</span>`;
+  } else $("#h1").innerHTML = `${WD[d.getDay()]}, ${d.getDate()} ${MONTHS[d.getMonth()]} <span class="year">${d.getFullYear()}</span>`;
+
+  const dates = S.view==="week" ? [...Array(7)].map((_,i)=>addDays(weekStart(S.date),i)) : [S.date];
+  const vis = new Set(visiblePeople().map(p=>p.id));
+  const evs = S.events.filter(e => dates.includes(e.date) && (vis.has(e.owner) || (e.people||[]).some(x=>vis.has(x))));
+  const joint = evs.filter(e => (e.people||[]).length).length;
+  let conf = []; dates.forEach(x => conf = conf.concat(conflictsOn(x).list.filter(c => vis.has(c.p.id))));
+  let pl = "";
+  if (S.ready.events && S.ready.people){
+    pl += `<span class="plate">${evs.length? plural(evs.length,"встреча","встречи","встреч") : "Встреч нет"}</span>`;
+    if (joint) pl += `<span class="plate">${plural(joint,"совместная","совместные","совместных")}</span>`;
+    if (conf.length) pl += `<button class="plate or" id="b-conf">${plural(conf.length,"пересечение","пересечения","пересечений")}<span class="ring">${ic("ne","i s")}</span></button>`;
+  }
+  $("#plates").innerHTML = pl;
+  $("#b-conf")?.addEventListener("click", () => openConflicts(conf));
+
+  const ws = weekStart(S.date), today = iso(new Date()), busy = new Set(S.events.map(e=>e.date));
+  $("#strip").innerHTML = `<button class="ib" id="s-prev" aria-label="Предыдущая неделя">${ic("l")}</button>` + [...Array(7)].map((_,i) => { const s = addDays(ws,i), dd = parse(s);
+    return `<button class="d ${s===S.date?"sel":""} ${s===today?"today":""} ${busy.has(s)?"has":""}" data-d="${s}" aria-label="${esc(ruDate(s))}">${WDS[dd.getDay()]}<b>${dd.getDate()}</b></button>`; }).join("") + `<button class="ib" id="s-next" aria-label="Следующая неделя">${ic("r")}</button>`;
+  $("#strip").querySelectorAll(".d").forEach(x => x.addEventListener("click", () => { S.date = x.dataset.d; render(); }));
+  $("#s-prev").addEventListener("click", () => { S.date = addDays(S.date,-7); render(); });
+  $("#s-next").addEventListener("click", () => { S.date = addDays(S.date,7); render(); });
+
+  const nb = $("#b-new"); nb.disabled = !canCreate();
+  nb.title = canCreate()? "" : "Назначать встречи могут секретарь и руководители в своём графике";
+}
+
+function stateHTML(title, text, extra=""){ return `<div class="state"><h3>${title}</h3><p>${text}</p>${extra}</div>`; }
+function renderBoard(){
+  const v = $("#board"); v.classList.remove("boxed");
+  const box = () => v.classList.add("boxed");
+  if (S.offline){ box(); v.innerHTML = stateHTML("Календарь недоступен в этом окне", "Откройте страницу по ссылке claude.ai под своей учётной записью: графики хранятся на сервере и видны всем участникам."); return; }
+  if (!S.ready.people || !S.ready.events){ box(); v.innerHTML = S.slow? stateHTML("Сервер отвечает медленно", "Графики появятся, как только соединение восстановится.") : `<div class="state"><div class="spin"></div><p>Загружаем графики</p></div>`; return; }
+  if (!S.people.length){ box(); v.innerHTML = stateHTML("Руководители не добавлены", S.isAdmin? "Добавьте Председателя и руководителей, и их графики встанут рядом." : "Секретарь ещё не заполнил список руководителей.", S.isAdmin? `<button class="btn pri" id="b-p0">${ic("users")}Добавить руководителей</button>`:""); $("#b-p0")?.addEventListener("click", openPeople); return; }
+  if (!visiblePeople().length){ box(); v.innerHTML = stateHTML("Никто не выбран", "Отметьте руководителей, чтобы увидеть их графики."); return; }
+  if (S.view==="list"){ box(); renderList(v); }
+  else if (mq.matches) renderAgenda(v, S.view==="week"? [...Array(7)].map((_,i)=>addDays(weekStart(S.date),i)) : [S.date]);
+  else if (S.view==="day") renderDay(v); else renderWeek(v);
+}
+
+function layoutLanes(items){
+  let cl=[], cur=[], end=-1;
+  for (const it of items){ if (cur.length && it.s>=end){ cl.push(cur); cur=[]; end=-1; } cur.push(it); end=Math.max(end,it.e); }
+  if (cur.length) cl.push(cur);
+  for (const c of cl){ const ends=[]; for (const it of c){ let l = ends.findIndex(x=>x<=it.s); if(l<0){ l=ends.length; ends.push(0);} ends[l]=it.e; it.lane=l; } c.forEach(it=>it.n=ends.length); }
+}
+function evMeta(e, pid){
+  if (e.owner !== pid){ const o = person(e.owner); return "Организатор: " + (o?.name || ""); }
+  const others = (e.people||[]).filter(x=>x!==pid).map(person).filter(Boolean).map(o=>o.name);
+  const guests = (e.guests||"").split(/\n/).map(s=>s.trim()).filter(Boolean);
+  return others.concat(guests).join(", ") || e.place || "";
+}
+const ccHTML = e => e.cc ? `<span class="cc">${ic("chat","i s")}${e.cc}</span>` : "";
+
+function renderDay(v){
+  const ppl = visiblePeople(); const {set} = conflictsOn(S.date); const hours = H1-H0;
+  const now = new Date(); const isToday = S.date===iso(now); const nowM = now.getHours()*60+now.getMinutes(); const showNow = isToday && nowM>=H0*60 && nowM<=H1*60;
+  let html = `<div class="day" style="grid-template-columns:60px repeat(${ppl.length}, minmax(156px,1fr))"><div class="ch corner"></div>`;
+  for (const p of ppl){ const a = awayOf(p.id, S.date);
+    html += `<div class="ch">${av(p)}<div class="nm"><b>${esc(p.name)}</b><span>${esc(p.role||"")}</span>${a? `<em class="away" data-aw="${esc(a.id)}" title="${esc(awayText(a))}">${esc(a.reason)}</em>`:""}</div></div>`; }
+  html += `<div class="tcol">${[...Array(hours)].map((_,i)=>`<div>${i? hhmm((H0+i)*60):""}</div>`).join("")}${showNow? `<div class="nowt" style="top:${(nowM-H0*60)/60*HPX}px">${hhmm(nowM)}</div>`:""}</div>`;
+  for (const p of ppl){
+    const list = eventsFor(p.id, S.date).map(ev => { const [s,en]=span(ev); const ss=Math.min(Math.max(s,H0*60),H1*60-30); return {ev, s:ss, e:Math.max(Math.min(en,H1*60), ss+30)}; });
+    layoutLanes(list);
+    const canAdd = canCreate() && (S.isAdmin || myPid()===p.id);
+    html += `<div class="col ${canAdd?"add":""} ${awayOf(p.id,S.date)?"off":""}" data-pid="${esc(p.id)}" style="height:${hours*HPX}px">`;
+    if (showNow) html += `<div class="now" style="top:${(nowM-H0*60)/60*HPX}px"></div>`;
+    for (const it of list){
+      const e = it.ev; const top=(it.s-H0*60)/60*HPX+2; const h=Math.max((it.e-it.s)/60*HPX-4, 26);
+      const w = 100/it.n; const conf = set.has(e.id+"|"+p.id); const meta = evMeta(e,p.id);
+      html += `<button class="ev ${kindOf(e,p.id)} ${conf?"conf":""}" data-eid="${esc(e.id)}" title="${esc(e.title)}" style="top:${top}px;height:${h}px;left:calc(${w*it.lane}% + 4px);width:calc(${w}% - 8px)">
+        <span class="t">${conf?'<span class="flag" title="Пересечение"></span>':""}${e.series? ic("repeat","i s"):""}${esc(e.start||"")}${e.end? " – "+esc(e.end):""}${ccHTML(e)}</span>
+        <span class="h" style="-webkit-line-clamp:${Math.max(1,Math.floor((h-31)/16.5))}">${esc(e.title)}</span>${meta && h>=96? `<span class="sub">${esc(meta)}</span>`:""}</button>`;
+    }
+    html += `</div>`;
+  }
+  const keep = scrolledFor===S.date ? [v.scrollTop, v.scrollLeft] : null;
+  v.innerHTML = html + `</div>`;
+  if (keep){ v.scrollTop = keep[0]; v.scrollLeft = keep[1]; }
+  else { const starts = S.events.filter(e=>e.date===S.date).map(e=>mins(e.start)).filter(x=>x!=null); const anchor = starts.length? Math.min(...starts) : 9*60;
+    v.scrollTop = Math.max(0, (anchor-H0*60)/60*HPX - 30); scrolledFor = S.date; }
+  v.querySelectorAll(".ev").forEach(b => b.addEventListener("click", ev => { ev.stopPropagation(); openEvent(b.dataset.eid); }));
+  wireAway(v);
+  v.querySelectorAll(".col.add").forEach(c => c.addEventListener("click", ev => {
+    if (ev.target !== c) return;
+    const m = H0*60 + Math.floor(ev.offsetY/HPX*60/30)*30;
+    openEditor(null, {owner:c.dataset.pid, date:S.date, start:hhmm(m), end:hhmm(m+60)});
+  }));
+}
+
+function renderWeek(v){
+  const ppl = visiblePeople(); const a = weekStart(S.date); const days=[...Array(7)].map((_,i)=>addDays(a,i)); const today=iso(new Date());
+  const confs = {}; days.forEach(d => confs[d]=conflictsOn(d).set);
+  let html = `<div class="week" style="grid-template-columns:220px repeat(7,minmax(118px,1fr))"><div class="wh corner"></div>`;
+  for (const d of days){ const dd=parse(d); html += `<button class="wh ${d===today?"today":""}" data-d="${d}">${WDS[dd.getDay()]}<b>${dd.getDate()}</b></button>`; }
+  for (const p of ppl){
+    html += `<div class="wr">${av(p)}<div class="nm"><b>${esc(p.name)}</b><span>${esc(p.role||"")}</span></div></div>`;
+    for (const d of days){ const aw = awayOf(p.id,d); html += `<div class="wc ${d===today?"today":""}">${aw? `<button class="wplate" data-aw="${esc(aw.id)}">${esc(aw.reason)}</button>`:""}${eventsFor(p.id,d).map(e => `<button class="wchip ${kindOf(e,p.id)} ${confs[d].has(e.id+"|"+p.id)?"conf":""}" data-eid="${esc(e.id)}"><b>${esc(e.start||"")}</b>${esc(e.title)}</button>`).join("")}</div>`; }
+  }
+  v.innerHTML = html + `</div>`;
+  wireAway(v);
+  v.querySelectorAll(".wchip").forEach(b => b.addEventListener("click", () => openEvent(b.dataset.eid)));
+  v.querySelectorAll("button.wh").forEach(h => h.addEventListener("click", () => { S.date=h.dataset.d; setView("day"); }));
+}
+
+function renderAgenda(v, dates){
+  const vis = new Set(visiblePeople().map(p=>p.id)); let html = `<div class="agenda">`; let any = false;
+  for (const date of dates){
+    const {set} = conflictsOn(date);
+    const evs = S.events.filter(e => e.date===date && (vis.has(e.owner) || (e.people||[]).some(x=>vis.has(x)))).sort((a,b)=>(mins(a.start)??0)-(mins(b.start)??0));
+    const aws = visiblePeople().map(p => [p, awayOf(p.id,date)]).filter(x => x[1]);
+    if (dates.length>1){ if (!evs.length && !aws.length) continue; const dd = parse(date); html += `<h3 class="ag-day">${WD[dd.getDay()]}, ${dd.getDate()} ${MONTHS[dd.getMonth()]}</h3>`; }
+    if (aws.length){ any = true; html += `<div class="ag-away">${aws.map(([p,a]) => `<button data-aw="${esc(a.id)}">${av(p,"av s")}<span><b>${esc(p.name)}</b>: ${esc(awayText(a).toLowerCase())}</span></button>`).join("")}</div>`; }
+    if (!evs.length && dates.length===1) html += `<p class="ag-empty">На этот день встреч нет.</p>`;
+    for (const e of evs){
+      any = true;
+      const who = [e.owner].concat(e.people||[]).map(person).filter(Boolean);
+      const cp = who.filter(p => set.has(e.id+"|"+p.id));
+      const guests = (e.guests||"").split("\n").map(s=>s.trim()).filter(Boolean);
+      const k = (e.people||[]).length? "joint":"own";
+      html += `<button class="ag" data-eid="${esc(e.id)}">
+        <span class="ag-t"><b>${esc(e.start||"—")}</b>${e.end? `<small>${esc(e.end)}</small>`:""}</span>
+        <span class="ag-b ${k} ${cp.length?"conf":""}"><span class="h">${esc(e.title)}</span>${e.series? `<span class="m">${ic("repeat","i s")}<span>Повторяется ${esc(e.rep||"")}</span></span>`:""}
+          <span class="m"><span class="stack">${who.slice(0,3).map(p=>av(p,"av s")).join("")}${who.length>3? `<span class="more">+${who.length-3}</span>`:""}</span><span>${esc(who.map(p=>p.name).concat(guests).join(", "))}</span></span>
+          ${cp.length || e.cc || e.place ? `<span class="f">${cp.length? `<span class="warn"><span class="flag"></span>Пересечение у ${esc(cp.map(p=>p.name).join(", "))}</span>`:""}${e.place? `<span>${esc(e.place)}</span>`:""}${e.cc? `<span style="display:inline-flex;gap:4px;align-items:center">${ic("chat","i s")}${e.cc}</span>`:""}</span>`:""}
+        </span></button>`;
+    }
+  }
+  if (dates.length>1 && !any) html += `<p class="ag-empty">На этой неделе встреч нет.</p>`;
+  v.innerHTML = html + `</div>`;
+  v.querySelectorAll(".ag").forEach(b => b.addEventListener("click", () => openEvent(b.dataset.eid)));
+  wireAway(v);
+}
+
+function partsOf(e, pid){
+  const parts = (e.people||[]).filter(x=>x!==pid).map(person).filter(Boolean).map(x=>x.name);
+  if (e.owner!==pid){ const o=person(e.owner); if(o) parts.unshift(o.name+" (организатор)"); }
+  return parts.concat((e.guests||"").split("\n").map(s=>s.trim()).filter(Boolean));
+}
+const sheetTitle = p => p.listTitle || ("ГРАФИК " + String(p.name||"").toUpperCase());
+function renderList(v){
+  let html = `<div class="list-tools"><button class="chip-btn" id="b-copy">${ic("copy","i s")}Скопировать для Excel</button></div><div class="list">`;
+  for (const p of visiblePeople()){
+    const list = eventsFor(p.id, S.date);
+    html += `<section class="sheet"><div class="sheet-h">${av(p)}<div><h2>${esc(p.name)}</h2><span>${esc(p.role||"")}, ${list.length? plural(list.length,"встреча","встречи","встреч") : "встреч нет"}${awayOf(p.id,S.date)? ", "+esc(awayText(awayOf(p.id,S.date)).toLowerCase()) : ""}</span></div></div>`;
+    list.forEach(e => { html += `<button class="r" data-eid="${esc(e.id)}"><span class="tm">${esc(e.start||"—")}</span><span class="tt">${esc(e.title)}${e.place? `<small>${esc(e.place)}</small>`:""}</span><span class="pp">${esc(partsOf(e,p.id).join("\n"))}</span><span class="nt">${esc(e.note||"")}</span></button>`; });
+    html += `</section>`;
+  }
+  v.innerHTML = html + `</div>`;
+  v.querySelectorAll("button.r").forEach(r => r.addEventListener("click", () => openEvent(r.dataset.eid)));
+  $("#b-copy").addEventListener("click", copyTSV);
+}
+function copyTSV(){
+  const q = s => /[\t\n"]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; const rows = [];
+  for (const p of visiblePeople()){
+    rows.push(sheetTitle(p), ["","Тема совещания","Дата/Время","Ответственный/Участник","Примечание"].join("\t"), dotDate(S.date)+" г.");
+    eventsFor(p.id,S.date).forEach((e,i) => rows.push([(i+1)+".", q(e.title), (e.start||"")+(e.end?"–"+e.end:""), q(partsOf(e,p.id).join("\n")), q(e.note||"")].join("\t")));
+    rows.push("");
+  }
+  const text = rows.join("\n");
+  navigator.clipboard.writeText(text).then(()=>toast("Скопировано. Вставьте в Excel")).catch(()=>{
+    const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); toast("Скопировано. Вставьте в Excel"); }catch(e){ toast("Не удалось скопировать"); } ta.remove();
+  });
+}
+
+// ---------- панели ----------
+function closePanel(){ if (unsubComments){ unsubComments(); unsubComments=null; } $("#overlay").innerHTML=""; document.removeEventListener("keydown", escClose); }
+function escClose(e){ if (e.key==="Escape") closePanel(); }
+function drawer(title, body, footer, focus=true){
+  if (unsubComments){ unsubComments(); unsubComments=null; }
+  $("#overlay").innerHTML = `<div class="scrim"></div><aside class="drawer" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header><h3>${esc(title)}</h3><button class="ib" id="p-x" aria-label="Закрыть">${ic("x")}</button></header><div class="body">${body}</div>${footer? `<footer>${footer}</footer>`:""}</aside>`;
+  $(".scrim").addEventListener("click", closePanel); $("#p-x").addEventListener("click", closePanel);
+  document.addEventListener("keydown", escClose);
+  if (focus && !mq.matches) setTimeout(()=>{ const f=$(".drawer .body input:not([type=checkbox]), .drawer .body select"); f&&f.focus(); },60);
+}
+
+function openProfile(){
+  const r = roleInfo();
+  drawer("Профиль", `<div class="card" style="grid-template-columns:auto 1fr">${S.me?.avatarUrl? `<img class="av" src="${esc(S.me.avatarUrl)}" alt="">` : `<span class="av">${ic("user")}</span>`}
+      <div><b id="pf-n" style="display:block;font-weight:600"></b><span class="hint" id="pf-h"></span></div></div>
+    <div><span class="badge ${r.cls}" id="pf-r"></span></div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      ${S.uid && !S.offline && writable() ? `<button class="btn sec" id="pf-link" style="justify-content:flex-start">${ic("user")}${myPid()? "Сменить мой график" : "Я руководитель: привязать свой график"}</button>`:""}
+      ${S.isAdmin ? `<button class="btn sec" id="pf-people" style="justify-content:flex-start">${ic("users")}Руководители и роли</button>`:""}
+    </div>
+    <dl class="facts" style="border-top:1px solid var(--line);padding-top:16px">
+      <div><dt>Секретарь</dt><dd>Назначает встречи во всех графиках и ведёт список руководителей</dd></div>
+      <div><dt>Руководитель или его помощник</dt><dd>Ведёт свой график, видит графики коллег, комментирует</dd></div>
+      <div><dt>Просмотр</dt><dd>Видит все графики</dd></div></dl>
+    <p class="hint">Уровень доступа выдаёт владелец страницы в меню «Поделиться»: секретарю Editor, руководителям Contributor, остальным Viewer.</p>`, "", false);
+  $("#pf-n").textContent = S.me?.name || "Гость"; $("#pf-h").textContent = r.hint; $("#pf-r").textContent = r.label;
+  $("#pf-link")?.addEventListener("click", openLink);
+  $("#pf-people")?.addEventListener("click", openPeople);
+}
+
+function openConflicts(conf){
+  drawer("Пересечения", conf.map(c => `<div class="card" style="align-items:start">${av(c.p)}<div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+      <b style="font-weight:600">${esc(c.p.name)}${S.view==="week"? `<span class="hint" style="font-weight:400">, ${esc(ruDate(c.a.date))}</span>`:""}</b>
+      ${[c.a,c.b].map(x => `<button class="wchip ${kindOf(x,c.p.id)} conf" data-eid="${esc(x.id)}" style="-webkit-line-clamp:3"><b>${esc(x.start)}</b>${esc(x.title)}</button>`).join("")}</div></div>`).join("") +
+    `<p class="hint">Если время окончания не указано, встреча считается часовой.</p>`, "", false);
+  document.querySelectorAll(".drawer .wchip").forEach(b => b.addEventListener("click", () => openEvent(b.dataset.eid)));
+}
+
+function openFree(){
+  let need = 60; const sel = new Set(visiblePeople().map(p=>p.id));
+  drawer("Общее окно", `<p class="hint" style="font-size:13.5px;color:var(--ink-2)">Время, когда свободны все выбранные руководители: ${esc(ruDate(S.date))}, с 09:00 до 19:00.</p>
+    <div class="fld"><span class="lb">Кто должен быть свободен</span><div class="picks" id="fr-p">${S.people.map(p=>`<label>${av(p,"av s")}<input type="checkbox" value="${esc(p.id)}" ${sel.has(p.id)?"checked":""}>${esc(p.name)}</label>`).join("")}</div></div>
+    <div class="fld"><span class="lb">Длительность</span><div class="dur" id="fr-d">${[30,60,90,120].map(m=>`<button data-m="${m}" aria-pressed="${m===need}">${durText(m)}</button>`).join("")}</div></div>
+    <div id="fr-out"></div>`, "", false);
+  const draw = () => {
+    const pids = [...document.querySelectorAll("#fr-p input:checked")].map(i=>i.value); const out = $("#fr-out");
+    if (!pids.length){ out.innerHTML = `<p class="hint">Выберите хотя бы одного руководителя.</p>`; return; }
+    const off = pids.map(id => [person(id), awayOf(id,S.date)]).filter(x => x[0] && x[1]);
+    if (off.length){ out.innerHTML = `<p class="hint busy">${esc(off.map(([p,a]) => p.name+": "+awayText(a).toLowerCase()).join("; "))}.</p><p class="hint" style="margin-top:6px">Снимите отметку с отсутствующих или выберите другой день.</p>`; return; }
+    const {free, busy} = freeSlots(pids, S.date, need);
+    const bar = `<div><div class="bar24">${busy.map(([s,e]) => { const a=Math.max(s,W0), b=Math.min(e,W1); return b>a? `<i style="left:${(a-W0)/(W1-W0)*100}%;width:${(b-a)/(W1-W0)*100}%"></i>`:""; }).join("")}</div><div class="bar-l"><span>09:00</span><span>14:00</span><span>19:00</span></div>
+      <div class="bar-k"><span><i style="background:var(--blue)"></i>Кто-то занят</span><span><i style="background:var(--blue-l)"></i>Все свободны</span></div></div>`;
+    out.innerHTML = bar + `<div class="slots" style="margin-top:14px">${free.length? free.map(([s,e]) => `<button class="slot" data-s="${s}"><b>${hhmm(s)} – ${hhmm(e)}</b><span>${durText(e-s)}${canCreate()? `<span class="ring">${ic("plus","i s")}</span>`:""}</span></button>`).join("") : `<p class="hint">Общего окна такой длительности нет. Попробуйте короче или другой день.</p>`}</div>`;
+    out.querySelectorAll(".slot").forEach(b => b.addEventListener("click", () => {
+      if (!canCreate()){ toast("Назначать встречи может секретарь"); return; }
+      const s = +b.dataset.s; const owner = S.isAdmin ? (pids.find(x => isLead(person(x))) || pids[0]) : myPid();
+      openEditor(null, {owner, date:S.date, start:hhmm(s), end:hhmm(s+need), people:pids.filter(x=>x!==owner)});
+    }));
+  };
+  document.querySelectorAll("#fr-p input").forEach(i => i.addEventListener("change", draw));
+  document.querySelectorAll("#fr-d button").forEach(b => b.addEventListener("click", () => { need = +b.dataset.m; document.querySelectorAll("#fr-d button").forEach(x=>x.setAttribute("aria-pressed", String(x===b))); draw(); }));
+  draw();
+}
+
+// ---------- комментарии ----------
+function commentsBlock(){ return `<section class="cm"><h4>${ic("chat")}Комментарии <span id="cm-n"></span></h4><div class="cm-list" id="cm-list"><p class="hint">Загрузка…</p></div>
+  ${canComment()? `<div class="cm-form"><textarea class="inp" id="cm-text" rows="1" placeholder="Написать комментарий" aria-label="Комментарий"></textarea><button class="btn pri" id="cm-send" aria-label="Отправить">${ic("send")}</button></div>` : `<p class="hint">Комментировать могут участники с доступом Contributor и выше.</p>`}</section>`; }
+function wireComments(e){
+  const col = db.collection("events/"+e.id+"/comments"); let count = 0;
+  const paint = async docs => {
+    const box = $("#cm-list"); if (!box) return;
+    const items = docs.map(d => ({id:d.id, ...d.data()})).sort((a,b)=>String(a.at).localeCompare(String(b.at))); count = items.length;
+    $("#cm-n").textContent = count? String(count) : "";
+    if (!items.length){ box.innerHTML = `<p class="hint">Пока нет комментариев.</p>`; return; }
+    let ps = {}; const ids = [...new Set(items.map(i=>i.by).filter(Boolean))];
+    if (user && ids.length){ try{ ps = await user.profiles(ids); }catch(err){} }
+    if (!$("#cm-list")) return;
+    box.innerHTML = items.map(i => { const p = ps[i.by]; const t = i.at? new Date(i.at) : null;
+      const when = t && !isNaN(t)? String(t.getDate()).padStart(2,"0")+"."+String(t.getMonth()+1).padStart(2,"0")+" в "+hhmm(t.getHours()*60+t.getMinutes()) : "";
+      return `<div class="cm-i">${p?.avatarUrl? `<img class="av s" src="${esc(p.avatarUrl)}" alt="">` : `<span class="av s">${ic("user","i s")}</span>`}<div><div class="hd"><b data-n="${esc(i.by||"")}"></b><time>${when}</time>${(i.by===S.uid || S.isAdmin) && canComment()? `<button data-del="${esc(i.id)}">Удалить</button>`:""}</div><p>${esc(i.text)}</p></div></div>`; }).join("");
+    box.querySelectorAll("[data-n]").forEach(b => { b.textContent = ps[b.dataset.n]?.name || "Участник"; });
+    box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => { try{ await col.doc(b.dataset.del).delete(); await db.doc("events/"+e.id).update({cc: Math.max(0,count-1)}); }catch(err){ toast("Не удалось удалить комментарий"); } }));
+  };
+  unsubComments = col.onSnapshot(snap => paint(snap.docs), () => { const b=$("#cm-list"); if (b) b.innerHTML = `<p class="hint">Комментарии недоступны.</p>`; });
+  const send = async () => {
+    const ta = $("#cm-text"); const text = ta.value.trim(); if (!text) return;
+    const btn = $("#cm-send"); btn.disabled = true;
+    try{ await col.add({text: text.slice(0,2000), by:S.uid, at:new Date().toISOString()}); ta.value=""; await db.doc("events/"+e.id).update({cc: count+1}); }
+    catch(err){ toast(err?.code==="invalid_argument"? "Нет прав на комментарии" : "Не удалось отправить"); }
+    btn.disabled = false;
+  };
+  $("#cm-send")?.addEventListener("click", send);
+  $("#cm-text")?.addEventListener("keydown", ev => { if (ev.key==="Enter" && (ev.metaKey||ev.ctrlKey)) send(); });
+}
+
+function openEvent(id){
+  const e = S.events.find(x=>x.id===id); if(!e) return;
+  if (canEditEvent(e)) return openEditor(e);
+  const o = person(e.owner); const parts = (e.people||[]).map(person).filter(Boolean);
+  drawer("Встреча", `<div class="ev-head ${parts.length?"joint":"own"}"><span class="when">${esc(ruDate(e.date))}, ${esc(e.start||"время не указано")}${e.end? " – "+esc(e.end):""}</span><span class="big">${esc(e.title)}</span></div>
+    <dl class="facts">
+      <div><dt>Организатор</dt><dd><span class="who-line">${av(o,"av s")}${esc(o?.name||"")}</span></dd></div>
+      ${parts.length? `<div><dt>Руководители</dt><dd style="display:flex;flex-wrap:wrap;gap:6px 16px">${parts.map(p=>`<span class="who-line">${av(p,"av s")}${esc(p.name)}</span>`).join("")}</dd></div>`:""}
+      ${e.guests? `<div><dt>Ответственные и внешние участники</dt><dd>${esc(e.guests)}</dd></div>`:""}
+      ${e.place? `<div><dt>Место</dt><dd>${esc(e.place)}</dd></div>`:""}
+      ${e.note? `<div><dt>Примечание</dt><dd>${esc(e.note)}</dd></div>`:""}
+      ${e.series? `<div><dt>Повтор</dt><dd>${esc(e.rep||"")}</dd></div>`:""}
+    </dl><div class="acts"><a class="btn sec" href="${esc(outlookUrl(e))}" target="_blank" rel="noopener">${ic("cal")}Добавить в Outlook</a></div>${commentsBlock()}`, "", false);
+  wireComments(e);
+}
+
+function openEditor(e, preset={}){
+  const isNew = !e; const d = e || {title:"", date:S.date, start:"10:00", end:"11:00", owner:myPid()||visiblePeople()[0]?.id||S.people[0]?.id, people:[], guests:"", place:"", note:"", kind:"Совещание", ...preset};
+  const owners = S.isAdmin ? S.people : S.people.filter(p=>p.id===myPid());
+  drawer(isNew? "Новая запись" : "Встреча", `${isNew? modeSwitch("ev") : ""}
+    ${e?.series? `<div class="rep-note">${ic("repeat")}Повторяется ${esc(e.rep||"")}. Изменения коснутся только этой встречи.</div>`:""}
+    <div class="fld"><label for="f-title">Тема</label><input class="inp big" id="f-title" value="${esc(d.title)}" placeholder="Например, рабочее совещание по вопросам СВА" autocomplete="off"></div>
+    <div class="grid3">
+      <div class="fld"><label for="f-date">Дата</label><input class="inp" type="date" id="f-date" value="${esc(d.date)}"></div>
+      <div class="fld"><label for="f-start">Начало</label><input class="inp" type="time" id="f-start" value="${esc(d.start||"")}" step="300"></div>
+      <div class="fld"><label for="f-end">Конец</label><input class="inp" type="time" id="f-end" value="${esc(d.end||"")}" step="300"></div>
+    </div>
+    <div class="grid2">
+      <div class="fld"><label for="f-owner">Чей график</label><select class="inp" id="f-owner">${owners.map(p=>`<option value="${esc(p.id)}" ${p.id===d.owner?"selected":""}>${esc(p.name)}</option>`).join("")}</select></div>
+      <div class="fld"><label for="f-kind">Формат</label><select class="inp" id="f-kind">${KINDS.map(k=>`<option ${k===d.kind?"selected":""}>${esc(k)}</option>`).join("")}</select></div>
+    </div>
+    ${isNew? `<div class="grid2"><div class="fld"><label for="f-rep">Повтор</label><select class="inp" id="f-rep"><option value="">Не повторять</option>${Object.entries(REP).map(([k,v])=>`<option value="${k}">${v[0].toUpperCase()+v.slice(1)}</option>`).join("")}</select></div>
+      <div class="fld" id="f-until-w" hidden><label for="f-until">До какого числа</label><input class="inp" type="date" id="f-until"></div></div>` : ""}
+    <div class="fld"><span class="lb">Пригласить руководителей</span><div class="picks" id="f-people">${S.people.map(p=>`<label>${av(p,"av s")}<input type="checkbox" value="${esc(p.id)}" ${(d.people||[]).includes(p.id)?"checked":""}>${esc(p.name)}</label>`).join("")}</div>
+      <p class="hint" id="f-busy"></p></div>
+    <div class="fld"><label for="f-guests">Ответственные и внешние участники</label><textarea class="inp" id="f-guests" rows="2" placeholder="По одному в строке">${esc(d.guests||"")}</textarea></div>
+    <div class="fld"><label for="f-place">Место</label><input class="inp" id="f-place" value="${esc(d.place||"")}" placeholder="Переговорная, министерство, ВКС"></div>
+    <div class="fld"><label for="f-note">Примечание</label><textarea class="inp" id="f-note" rows="2">${esc(d.note||"")}</textarea></div>
+    <p class="msg" id="f-msg" role="status"></p>${isNew? "" : `<div class="acts"><a class="btn sec" href="${esc(outlookUrl(e))}" target="_blank" rel="noopener">${ic("cal")}Добавить в Outlook</a></div>` + commentsBlock()}`,
+    `<button class="btn pri" id="f-save">${isNew?"Назначить":"Сохранить"}</button><button class="btn sec" id="f-cancel">Отмена</button>${!isNew? `<button class="btn del" id="f-del">Удалить</button>`:""}`, isNew);
+  if (!isNew) wireComments(e);
+  if (isNew) wireMode();
+  $("#f-cancel").addEventListener("click", closePanel);
+  const untilDefault = () => { const d = parse($("#f-date").value || S.date); d.setMonth(d.getMonth()+3); return iso(d); };
+  $("#f-rep")?.addEventListener("change", () => { const on = !!$("#f-rep").value; $("#f-until-w").hidden = !on; if (on && !$("#f-until").value) $("#f-until").value = untilDefault(); });
+  const check = () => {
+    const o=$("#f-owner").value; document.querySelectorAll("#f-people input").forEach(i=>{ const l=i.closest("label"); l.hidden = i.value===o; if(i.value===o) i.checked=false; });
+    const date=$("#f-date").value, st=mins($("#f-start").value); let en=mins($("#f-end").value); const out=$("#f-busy");
+    if (st==null || !date){ out.textContent=""; return; } if (en==null || en<=st) en=st+60;
+    const pids=[o].concat([...document.querySelectorAll("#f-people input:checked")].map(i=>i.value));
+    const busy = pids.map(person).filter(Boolean).filter(p => eventsFor(p.id,date).some(x => x.id!==e?.id && span(x)[0]<en && st<span(x)[1]));
+    const off = pids.map(person).filter(Boolean).map(p => [p, awayOf(p.id,date)]).filter(x => x[1]);
+    const msgs = [];
+    if (off.length) msgs.push(`Нет на месте: ${off.map(([p,a]) => p.name+" ("+a.reason.toLowerCase()+")").join(", ")}`);
+    if (busy.length) msgs.push(`В это время заняты: ${busy.map(p=>p.name).join(", ")}`);
+    out.innerHTML = msgs.length? `<span class="busy">${esc(msgs.join(". "))}</span>` : "Встреча появится в графиках всех приглашённых.";
+  };
+  ["f-owner","f-date","f-start","f-end"].forEach(id => $("#"+id).addEventListener("change", check));
+  document.querySelectorAll("#f-people input").forEach(i => i.addEventListener("change", check)); check();
+  $("#f-save").addEventListener("click", async () => {
+    const msg = $("#f-msg");
+    const rec = { title:$("#f-title").value.trim(), date:$("#f-date").value, start:$("#f-start").value, end:$("#f-end").value,
+      owner:$("#f-owner").value, kind:$("#f-kind").value, people:[...document.querySelectorAll("#f-people input:checked")].map(i=>i.value),
+      guests:$("#f-guests").value.trim(), place:$("#f-place").value.trim(), note:$("#f-note").value.trim(), cc: e?.cc||0,
+      createdBy: isNew? (S.uid||null) : (e.createdBy||null), updatedBy:S.uid||null, updatedAt:new Date().toISOString() };
+    if (!rec.title){ msg.textContent="Укажите тему встречи."; $("#f-title").focus(); return; }
+    if (!rec.date){ msg.textContent="Укажите дату."; return; }
+    if (rec.end && rec.start && rec.end <= rec.start){ msg.textContent="Время окончания должно быть позже начала."; return; }
+    const rule = isNew ? ($("#f-rep")?.value || "") : "";
+    let dates = [rec.date];
+    if (rule){ const until = $("#f-until").value; if (!until || until < rec.date){ msg.textContent="Укажите, до какого числа повторять."; return; }
+      dates = repeatDates(rec.date, rule, until); if (!dates.length){ msg.textContent="В этом промежутке нет подходящих дней."; return; }
+      rec.series = "s"+Date.now().toString(36); rec.rep = REP[rule]; }
+    else if (!isNew && e.series){ rec.series = e.series; rec.rep = e.rep||""; }
+    const btn=$("#f-save"); btn.disabled=true; btn.textContent="Сохраняем…";
+    try{
+      if (isNew){ for (const d of dates) await db.collection("events").add({...rec, date:d}); }
+      else await db.doc("events/"+e.id).set(rec);
+      closePanel(); toast(isNew? (dates.length>1? "Назначено "+plural(dates.length,"встреча","встречи","встреч") : "Встреча назначена") : "Изменения сохранены");
+      if (rec.date!==S.date && S.view!=="week"){ S.date=rec.date; S.month=null; render(); }
+    }catch(err){
+      btn.disabled=false; btn.textContent=isNew?"Назначить":"Сохранить";
+      if (err?.code==="invalid_argument"){ S.roOverride=true; msg.textContent="Нет прав на изменение. Попросите владельца страницы выдать доступ Contributor или выше."; render(); }
+      else if (err?.code==="quota_exceeded") msg.textContent="Хранилище заполнено. Удалите старые встречи.";
+      else msg.textContent="Не удалось сохранить. Проверьте соединение и повторите.";
+    }
+  });
+  const del = $("#f-del");
+  del?.addEventListener("click", async () => {
+    if (e.series){
+      const foot = $(".drawer footer");
+      foot.innerHTML = `<span class="hint" style="margin-right:auto">Удалить повторяющуюся встречу:</span><button class="btn sec" id="d-one">Только эту</button><button class="btn pri" id="d-all">Эту и следующие</button>`;
+      const go = async all => { foot.querySelectorAll("button").forEach(b=>b.disabled=true);
+        const ids = all ? S.events.filter(x => x.series===e.series && x.date>=e.date).map(x=>x.id) : [e.id];
+        try{ for (const id of ids) await deleteEvent(id); closePanel(); toast(ids.length>1? "Удалено "+plural(ids.length,"встреча","встречи","встреч") : "Встреча удалена"); }
+        catch(err){ toast("Не удалось удалить"); closePanel(); } };
+      $("#d-one").addEventListener("click", () => go(false)); $("#d-all").addEventListener("click", () => go(true)); return;
+    }
+    if (!del.classList.contains("armed")){ del.classList.add("armed"); del.textContent="Удалить навсегда?"; return; }
+    del.disabled=true;
+    try{ await deleteEvent(e.id); closePanel(); toast("Встреча удалена"); }
+    catch(err){ del.disabled=false; $("#f-msg").textContent="Не удалось удалить встречу."; }
+  });
+}
+async function deleteEvent(id){
+  const cs = await db.collection("events/"+id+"/comments").get();
+  for (const c of cs.docs) await db.doc("events/"+id+"/comments/"+c.id).delete();
+  await db.doc("events/"+id).delete();
+}
+function modeSwitch(m){ return `<div class="seg2" id="f-mode"><button data-m="ev" aria-pressed="${m==="ev"}">${ic("cal","i s")} Встреча</button><button data-m="away" aria-pressed="${m==="away"}">${ic("away","i s")} Отсутствие</button></div>`; }
+function wireMode(){
+  $("#f-mode [data-m=away]").addEventListener("click", () => { if ($("#f-mode [data-m=away]").getAttribute("aria-pressed")==="true") return; openAway(null, {pid:$("#f-owner")?.value, from:$("#f-date")?.value||S.date}); });
+  $("#f-mode [data-m=ev]").addEventListener("click", () => { if ($("#f-mode [data-m=ev]").getAttribute("aria-pressed")==="true") return; openEditor(null, {owner:$("#f-apid")?.value, date:$("#f-from")?.value||S.date}); });
+}
+function wireAway(root){ root.querySelectorAll("[data-aw]").forEach(x => x.addEventListener("click", ev => { ev.stopPropagation(); const a = S.absences.find(y => y.id===x.dataset.aw); if (a) openAway(a); })); }
+
+function openAway(a, preset={}){
+  const isNew = !a;
+  const d = a || {pid: myPid() || preset.pid || S.people[0]?.id, reason:"Командировка", from:S.date, to:"", note:"", ...preset};
+  if (!d.to) d.to = d.from;
+  const editable = isNew ? canCreate() : canEditPid(a.pid);
+  const p = person(d.pid);
+  if (!editable){
+    drawer("Нет на месте", `<div class="ev-head own"><span class="when">${esc(d.from===d.to? ruDate(d.from) : shortDate(d.from)+" – "+ruDate(d.to))}</span><span class="big">${esc(d.reason)}</span></div>
+      <dl class="facts"><div><dt>Кто</dt><dd><span class="who-line">${av(p,"av s")}${esc(p?.name||"")}</span></dd></div>${d.note? `<div><dt>Комментарий</dt><dd>${esc(d.note)}</dd></div>`:""}</dl>`, "", false);
+    return;
+  }
+  const owners = S.isAdmin ? S.people : S.people.filter(x=>x.id===myPid());
+  drawer(isNew? "Новая запись" : "Нет на месте", `${isNew? modeSwitch("away") : ""}
+    <div class="fld"><label for="f-apid">Кто</label><select class="inp" id="f-apid">${owners.map(x=>`<option value="${esc(x.id)}" ${x.id===d.pid?"selected":""}>${esc(x.name)}</option>`).join("")}</select></div>
+    <div class="fld"><span class="lb">Причина</span><div class="seg2" id="f-reason">${REASONS.map(r=>`<button data-r="${esc(r)}" aria-pressed="${r===d.reason}">${esc(r)}</button>`).join("")}</div></div>
+    <div class="grid2"><div class="fld"><label for="f-from">С</label><input class="inp" type="date" id="f-from" value="${esc(d.from)}"></div>
+      <div class="fld"><label for="f-to">По</label><input class="inp" type="date" id="f-to" value="${esc(d.to)}"></div></div>
+    <div class="fld"><label for="f-anote">Комментарий</label><input class="inp" id="f-anote" value="${esc(d.note||"")}" placeholder="Например, Экибастуз, ГРЭС-1"></div>
+    <p class="hint">В эти дни график будет отмечен серым, а «Найти окно» не предложит время с этим руководителем.</p>
+    <p class="msg" id="f-msg" role="status"></p>`,
+    `<button class="btn pri" id="f-save">${isNew?"Отметить":"Сохранить"}</button><button class="btn sec" id="f-cancel">Отмена</button>${!isNew? `<button class="btn del" id="f-del">Удалить</button>`:""}`, false);
+  if (isNew) wireMode();
+  let reason = d.reason;
+  document.querySelectorAll("#f-reason button").forEach(b => b.addEventListener("click", () => { reason = b.dataset.r; document.querySelectorAll("#f-reason button").forEach(x => x.setAttribute("aria-pressed", String(x===b))); }));
+  $("#f-from").addEventListener("change", () => { if ($("#f-to").value < $("#f-from").value) $("#f-to").value = $("#f-from").value; });
+  $("#f-cancel").addEventListener("click", closePanel);
+  $("#f-save").addEventListener("click", async () => {
+    const rec = {pid:$("#f-apid").value, reason, from:$("#f-from").value, to:$("#f-to").value || $("#f-from").value, note:$("#f-anote").value.trim(), by:S.uid||null, at:new Date().toISOString()};
+    if (!rec.from){ $("#f-msg").textContent = "Укажите дату начала."; return; }
+    if (rec.to < rec.from){ $("#f-msg").textContent = "Дата окончания раньше начала."; return; }
+    const btn = $("#f-save"); btn.disabled = true;
+    try{ if (isNew) await db.collection("absences").add(rec); else await db.doc("absences/"+a.id).set(rec); closePanel(); toast(isNew? "Отсутствие отмечено" : "Изменения сохранены"); }
+    catch(err){ btn.disabled = false; $("#f-msg").textContent = err?.code==="invalid_argument"? "Нет прав на изменение." : "Не удалось сохранить. Проверьте соединение."; }
+  });
+  const del = $("#f-del");
+  del?.addEventListener("click", async () => {
+    if (!del.classList.contains("armed")){ del.classList.add("armed"); del.textContent="Точно удалить?"; return; }
+    try{ await db.doc("absences/"+a.id).delete(); closePanel(); toast("Отметка удалена"); }catch(err){ $("#f-msg").textContent="Не удалось удалить."; }
+  });
+}
+
+// ---------- план на день ----------
+function planText(date, pids){
+  const d = parse(date); let t = `График руководства на ${WD[d.getDay()].toLowerCase()}, ${ruDate(date)}\n`;
+  for (const pid of pids){ const p = person(pid); if (!p) continue;
+    t += `\n${p.name}${p.role? ", "+p.role : ""}\n`;
+    const a = awayOf(pid, date); if (a) t += `${awayText(a)}${a.note? " ("+a.note+")" : ""}\n`;
+    const evs = eventsFor(pid, date); if (!evs.length && !a) t += "Встреч нет\n";
+    evs.forEach(e => { const parts = partsOf(e, pid); t += `${e.start||"—"}${e.end? "–"+e.end : ""}  ${e.title}${e.place? ", "+e.place : ""}${parts.length? " ("+parts.join(", ")+")" : ""}\n`; });
+  }
+  return t.trim();
+}
+function loadXLSX(){ return window.XLSX ? Promise.resolve(window.XLSX) : new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; sc.onload = () => res(window.XLSX); sc.onerror = rej; document.head.appendChild(sc); }); }
+async function downloadXlsx(date, pids){
+  const X = await loadXLSX(); const rows = [], merges = [];
+  for (const pid of pids){ const p = person(pid); if (!p) continue;
+    merges.push({s:{r:rows.length,c:0}, e:{r:rows.length,c:4}}); rows.push([sheetTitle(p)]);
+    rows.push(["","Тема совещания","Дата/Время","Ответственный/Участник","Примечание"]);
+    merges.push({s:{r:rows.length,c:0}, e:{r:rows.length,c:4}}); rows.push([dotDate(date)+" г."]);
+    const a = awayOf(pid, date); if (a) rows.push(["", awayText(a), "", "", a.note||""]);
+    eventsFor(pid, date).forEach((e,i) => rows.push([(i+1)+".", e.title, (e.start||"")+(e.end? "–"+e.end : ""), partsOf(e,pid).join("\n"), e.note||""]));
+    rows.push([]);
+  }
+  const ws = X.utils.aoa_to_sheet(rows); ws["!merges"] = merges; ws["!cols"] = [{wch:5},{wch:48},{wch:13},{wch:38},{wch:30}];
+  const wb = X.utils.book_new(); X.utils.book_append_sheet(wb, ws, "График");
+  const buf = X.write(wb, {type:"array", bookType:"xlsx"});
+  return dl.save({filename:`График руководства ${dotDate(date)}.xlsx`, data:buf});
+}
+function openPlan(){
+  const today = iso(new Date()), tomorrow = addDays(today, 1);
+  const opts = [[today,"Сегодня"],[tomorrow,"Завтра"]]; if (S.date!==today && S.date!==tomorrow) opts.push([S.date, shortDate(S.date)]);
+  let date = S.date===today || S.date===tomorrow ? S.date : S.date;
+  drawer("План на день", `<div class="seg2" id="pl-d">${opts.map(([d,l]) => `<button data-d="${d}" aria-pressed="${d===date}">${esc(l)}</button>`).join("")}</div>
+    <div class="fld"><span class="lb">Чьи графики</span><div class="picks" id="pl-p">${S.people.map(p=>`<label>${av(p,"av s")}<input type="checkbox" value="${esc(p.id)}" ${!S.hidden.has(p.id)?"checked":""}>${esc(p.name)}</label>`).join("")}</div></div>
+    <pre class="plan-pre" id="pl-t"></pre>
+    <div class="acts"><button class="btn pri" id="pl-copy">${ic("copy")}Скопировать</button><a class="btn sec" id="pl-wa" target="_blank" rel="noopener">${ic("share")}Отправить в WhatsApp</a>${dl? `<button class="btn sec" id="pl-x">${ic("xls")}Скачать Excel</button>`:""}</div>
+    <p class="hint">Текст можно вставить в WhatsApp, Telegram или письмо. Excel — в прежнем формате графика.</p>`, "", false);
+  const pids = () => [...document.querySelectorAll("#pl-p input:checked")].map(i=>i.value);
+  const draw = () => { const t = planText(date, pids()); $("#pl-t").textContent = t; $("#pl-wa").href = "https://wa.me/?text=" + encodeURIComponent(t); };
+  document.querySelectorAll("#pl-d button").forEach(b => b.addEventListener("click", () => { date = b.dataset.d; document.querySelectorAll("#pl-d button").forEach(x=>x.setAttribute("aria-pressed", String(x===b))); draw(); }));
+  document.querySelectorAll("#pl-p input").forEach(i => i.addEventListener("change", draw));
+  $("#pl-copy").addEventListener("click", () => { const t = $("#pl-t").textContent;
+    navigator.clipboard.writeText(t).then(() => toast("План скопирован")).catch(() => { const r = document.createRange(); r.selectNodeContents($("#pl-t")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast("Текст выделен. Скопируйте его"); }); });
+  $("#pl-x")?.addEventListener("click", async () => { const b = $("#pl-x"); b.disabled = true;
+    try{ await downloadXlsx(date, pids()); toast("Файл сохранён"); }
+    catch(err){ if (err?.code !== "declined") toast(err?.code==="rate_limited"? "Подождите и повторите" : "Не удалось подготовить файл"); }
+    b.disabled = false; });
+  draw();
+}
+
+function openLink(){
+  const cur = myPid();
+  drawer("Мой график", `<p class="hint" style="font-size:13.5px;color:var(--ink-2)">Выберите свой график, и вы сможете сами вести встречи в нём. Графики коллег останутся доступными для просмотра и комментариев.</p>
+    <div class="fld"><label for="f-me">Я в календаре</label><select class="inp" id="f-me"><option value="">Я не руководитель</option>${S.people.map(p=>`<option value="${esc(p.id)}" ${p.id===cur?"selected":""}>${esc(p.name)}, ${esc(p.role||"")}</option>`).join("")}</select></div>
+    <p class="msg" id="f-msg" role="status"></p>`,
+    `<button class="btn pri" id="f-save">Сохранить</button><button class="btn sec" id="f-cancel">Отмена</button>`);
+  $("#f-cancel").addEventListener("click", closePanel);
+  $("#f-save").addEventListener("click", async () => {
+    const pid = $("#f-me").value;
+    try{ if (pid) await db.doc("links/"+S.uid).set({pid}); else await db.doc("links/"+S.uid).delete(); closePanel(); toast(pid? "График привязан" : "Привязка снята"); }
+    catch(err){ $("#f-msg").textContent = "Не удалось сохранить. Нужен доступ Contributor или выше."; }
+  });
+}
+
+function openPeople(){
+  const rows = () => S.people.map(p => `<div class="card" data-pid="${esc(p.id)}">${av(p)}
+      <div class="two"><input class="inp" aria-label="ФИО" data-f="name" value="${esc(p.name)}"><input class="inp" aria-label="Должность" data-f="role" value="${esc(p.role||"")}" placeholder="Должность"></div>
+      <div class="bottom"><button class="btn del" data-del style="height:30px;padding:0 10px;font-size:12.5px">Убрать</button></div></div>`).join("");
+  drawer("Руководители и роли", `
+    <div id="prl" style="display:flex;flex-direction:column;gap:8px">${rows()}</div>
+    <div class="grid2"><div class="fld"><label for="f-np">ФИО</label><input class="inp" id="f-np" placeholder="Фамилия И.О."></div><div class="fld"><label for="f-nr">Должность</label><input class="inp" id="f-nr" placeholder="Заместитель Председателя Правления"></div></div>
+    <button class="btn sec" id="f-add" style="align-self:flex-start">${ic("plus")}Добавить руководителя</button>
+    <p class="hint">Изменения сразу видят все участники. Председатель Правления отмечен тёмно-синим кружком.</p>
+    <p class="msg" id="f-msg" role="status"></p>`, "", false);
+  const wire = () => document.querySelectorAll("#prl .card").forEach(r => {
+    const id = r.dataset.pid;
+    r.querySelectorAll("input").forEach(i => i.addEventListener("change", async () => { try{ await db.doc("people/"+id).update({[i.dataset.f]: i.value.trim()}); }catch(e){ $("#f-msg").textContent="Не удалось сохранить."; } }));
+    const del = r.querySelector("[data-del]");
+    del.addEventListener("click", async () => {
+      if (!del.classList.contains("armed")){ del.classList.add("armed"); del.textContent="Точно убрать?"; return; }
+      try{ await db.doc("people/"+id).delete(); r.remove(); }catch(e){ $("#f-msg").textContent="Не удалось убрать."; } });
+  });
+  wire();
+  $("#f-add").addEventListener("click", async () => {
+    const name = $("#f-np").value.trim(); if(!name){ $("#f-np").focus(); return; }
+    const order = Math.max(0, ...S.people.map(p=>p.order||0)) + 1;
+    try{ await db.collection("people").add({name, role:$("#f-nr").value.trim(), order});
+      $("#f-np").value=""; $("#f-nr").value=""; setTimeout(()=>{ if ($("#prl")){ $("#prl").innerHTML = rows(); wire(); } }, 400);
+    }catch(e){ $("#f-msg").textContent="Не удалось добавить."; }
+  });
+}
+
+// ---------- навигация ----------
+function setView(v){ S.view=v; store("gr-view", v); render(); }
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => setView(b.dataset.view)));
+$("#b-prev").addEventListener("click", () => { S.date = addDays(S.date, S.view==="week"?-7:-1); S.month=null; render(); });
+$("#b-next").addEventListener("click", () => { S.date = addDays(S.date, S.view==="week"?7:1); S.month=null; render(); });
+$("#b-today").addEventListener("click", () => { S.date = iso(new Date()); S.month=null; render(); });
+$("#b-new").addEventListener("click", () => { if (canCreate()) openEditor(null); });
+$("#b-free").addEventListener("click", () => { if (S.people.length) openFree(); });
+$("#b-plan").addEventListener("click", () => { if (S.people.length) openPlan(); });
+$("#b-all").addEventListener("click", () => { S.hidden.clear(); store("gr-hidden","[]"); render(); });
+$("#me-btn").addEventListener("click", openProfile);
+mq.addEventListener("change", () => { scrolledFor=null; renderBoard(); });
+document.addEventListener("keydown", e => {
+  if ($("#overlay").innerHTML || /INPUT|SELECT|TEXTAREA/.test(document.activeElement?.tagName||"")) return;
+  if (e.key==="ArrowLeft") $("#b-prev").click(); else if (e.key==="ArrowRight") $("#b-next").click();
+});
+try{ const v = load("gr-view"); if (["day","week","list"].includes(v)) S.view=v; const h = JSON.parse(load("gr-hidden")||"[]"); if (Array.isArray(h)) h.forEach(x=>S.hidden.add(x)); }catch(e){}
+render();
+
+// ---------- данные ----------
+async function start(){
+  if (!window.claude?.use){ S.offline = true; render(); return; }
+  [user, db, dl] = await Promise.all([claude.use("user"), claude.use("db"), claude.use("downloads")]);
+  if (!db){ S.offline = true; render(); return; }
+  if (user){ const [me, admin, cw] = await Promise.all([user.me(), user.canEdit(), user.can("data.write")]); S.me = me; S.uid = me.id; S.isAdmin = admin; S.canWrite = cw; }
+  const timer = setTimeout(() => { S.slow = true; render(); }, 10000);
+  const done = () => { if (S.ready.people && S.ready.events) clearTimeout(timer); };
+  db.collection("people").onSnapshot(snap => {
+    S.people = snap.docs.map(d => ({id:d.id, ...d.data()})).sort((a,b)=>(a.order||0)-(b.order||0));
+    if (!snap.metadata.fromCache || snap.size) S.ready.people = true; done(); render();
+  }, () => { S.ready.people = true; render(); });
+  db.collection("events").onSnapshot(snap => {
+    S.events = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    if (!snap.metadata.fromCache || snap.size) S.ready.events = true; done(); render();
+  }, () => { S.ready.events = true; render(); });
+  db.collection("absences").onSnapshot(snap => { S.absences = snap.docs.map(d => ({id:d.id, ...d.data()})); render(); }, () => {});
+  db.collection("links").onSnapshot(snap => {
+    const m = {}; snap.docs.forEach(d => { const v = d.data(); if (v && v.pid) m[d.id] = v.pid; });
+    S.links = m; render();
+  }, () => {});
+  setInterval(() => { if (S.view==="day" && S.date===iso(new Date()) && !$("#overlay").innerHTML) renderBoard(); }, 60000);
+}
+start();
+})();
+</script>
